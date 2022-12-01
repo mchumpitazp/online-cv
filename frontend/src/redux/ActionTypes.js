@@ -1,0 +1,3 @@
+export const ADD_RECORDS = 'ADD_RECORDS';
+export const RECORDS_LOADING = 'RECORDS_LOADING';
+export const RECORDS_FAILED = 'RECORDS_FAILED';

@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+
+$color-primary: #0a0a0a;
+$color-secondary: #00bfe1;
+
+.color-secondary {
+    color: $color-secondary;
+}
+
+.link-colored-secondary {
+    color: white;
+    text-decoration: none;
+}
+
+.link-colored-secondary:hover {
+    color: $color-secondary;
+    text-decoration: none;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 4.8vh; }
+h3 { font-size: 3.5vh; }
+h4 { font-size: 3vh; }
+h5 { font-size: 2.5vh; }
+h6 { font-size: 2vh; }
+
+i { font-size: inherit !important; }
+
+.divider {
+    flex-grow: 1;
+    height: 0.1rem;
+    background-color: white;
+    opacity: 0.1;
+}
+
+@keyframes intro-fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#root {
+    color: white;
+    background-color: $color-primary;
+    font-family: 'Kanit', sans-serif;
+    overflow: hidden;
+}
+
+.modal {
+    font-family: 'Kanit', sans-serif;
+}
+
+#intro {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 4rem;
+    background-color: black;
+
+    animation-name: intro-fade-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+
+    #intro-title { font-size: 4rem; }
+
+    #intro-subtitle {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 1.5rem;
+        color: $color-secondary;
+
+        #subtitle-cursor { visibility: hidden; }
+    }
+}
+
+#navbar,
+footer {
+    background-color: black;
+    opacity: 0.9;
+    position: sticky;
+}
+
+#navbar { top: 0; }
+
+footer { 
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    color: rgba(255, 255, 255, 0.5); 
+    
+    #footer-copyrights {
+        display: flex;
+        align-items: center;
+    }
+
+    #footer-links {
+        display: flex;
+
+        i {
+            color: rgba(255, 255, 255, 0.5); 
+        }
+    
+        i:hover { 
+            cursor: pointer;
+            color: $color-secondary;
+        }
+    }   
+}
+
+#headline {
+    display: flex;
+    max-height: 90%;
+    height: 100%;
+
+    #headline-content {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+        #subtitle {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            color: $color-secondary;
+
+            #subtitle-text { padding-top: 2px; }
+        }
+
+        p { text-align: justify; }
+    }
+
+    #headline-portrait-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+        }
+    }
+}
+
+#portfolio {
+    .form-switch input:checked {
+        background-color: $color-secondary;
+    }
+}
+
+.d-flex-gapped {
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
+
+.contact-modal-link {
+    text-decoration: none;
+    color: black;
+}
+.contact-modal-link:hover {
+    color: inherit;
+}
