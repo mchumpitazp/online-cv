@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import ModalContact from './ModalContactComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function Headline() {
     const subtitleRef = React.useRef(null);
@@ -58,7 +59,7 @@ function Headline() {
                     </Col>
                     
                     <Col lg id='headline-portrait-container'>
-                        <img src='assets/images/portrait.png' alt='Portrait'/>
+                        <img src={baseUrl + 'images/portrait.png'} alt='Portrait'/>
                     </Col>
                 </Row>
                 

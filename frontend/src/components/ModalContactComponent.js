@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 function ModalContact(props) {
     return(
         <Modal centered isOpen={props.isOpen} toggle={props.toggle}>
-            <ModalHeader toggle={props.toggle}><h3>Contact Me</h3></ModalHeader>
+            <ModalHeader toggle={props.toggle} tag='h3'>Contact Me</ModalHeader>
             <ModalBody>
                 <h5>
                     <i className='fa fa-envelope me-3'></i>

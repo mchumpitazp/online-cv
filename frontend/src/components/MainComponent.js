@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Components
 import Intro from './IntroComponent';
 import Header from './HeaderComponent';
 import Headline from './HeadlineComponent';
@@ -9,11 +11,29 @@ import Experience from './ExperienceComponent';
 import Records from './RecordsComponent';
 import Footer from './FooterComponent';
 
+// Redux
+import { connect } from 'react-redux';
+import { fetchProjects } from '../redux/ActionCreators';
+
+const mapStateToProps = state => {
+    return {
+        projects: state.projects
+    }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchProjects: () => {dispatch(fetchProjects())}
+});
+
 class Main extends React.Component {
 
     constructor() {
         super();
         this.state = { renderIntro: false };
+    }
+
+    componentDidMount() {
+        this.props.fetchProjects();
     }
 
     render() {
@@ -30,7 +50,7 @@ class Main extends React.Component {
                     <Header />
                     <Headline/>
                     <Education />
-                    <Portfolio />
+                    <Portfolio  projects={this.props.projects}/>
                     <Skills />
                     <Experience />
                     <Records />
@@ -41,4 +61,4 @@ class Main extends React.Component {
     }
 }
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
