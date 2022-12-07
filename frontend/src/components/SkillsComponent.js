@@ -61,11 +61,10 @@ function RenderCodingLanguages() {
     );
 }
 
-function Skills() {
-
+function Skills(props) {
     return(
         <Container id="skills" className="d-flex-gapped">
-            <h2><strong>Skills</strong></h2>
+            <h2 ref={props.inputRef}><strong>Skills</strong></h2>
             
             <Container className="my-3">
                 <div className="d-flex align-items-center">

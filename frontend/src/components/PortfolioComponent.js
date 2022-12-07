@@ -33,11 +33,13 @@ function Portfolio(props) {
         );
     }
     else {
-        props.projects.projects.sort((a, b) => {
-            return new Date(b.date) - new Date(a.date);
-        })
+        const projectsSorted = [...props.projects.projects];
 
-        const projects = props.projects.projects.map((project) => {
+        projectsSorted.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        });
+        
+        const projects = projectsSorted.map((project) => {
             return(
                 <Col className={'portfolio-child mt-3 ' + 
                                 (switchChecked? 'scaleup-container' : 'scaleup-img')}
@@ -61,7 +63,7 @@ function Portfolio(props) {
         return(
             <Container id='portfolio' className='d-flex-gapped'>
                 <div className='d-flex align-items-center'>
-                    <h2 className='me-3'><strong>Portfolio</strong></h2>
+                    <h2 ref={props.inputRef} className='me-3'><strong>Portfolio</strong></h2>
 
                     <FormGroup switch>
                         <Input type='switch' role='switch' defaultChecked
@@ -78,7 +80,6 @@ function Portfolio(props) {
                         toggle={() => toggleModal(null)}
                         project={currProject}/>
             </Container>
-    
         );
     }
 }

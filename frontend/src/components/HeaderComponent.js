@@ -2,54 +2,58 @@ import React, { Component } from 'react';
 import { Navbar, NavbarToggler, Nav, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
-class Header extends Component {
+function Header(props) {
+    const [navState, setNav] = React.useState(false);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isNavOpen: false
-        };
-        this.toggleNav = this.toggleNav.bind(this);
+    const scrollToRef = (ref) => {
+        if (ref) {
+            ref.current.scrollIntoView({behavior: 'auto'});
+            document.querySelector('#root').scrollBy(0, -(1.5 * ref.current.clientHeight));
+        } else {
+            document.querySelector('#root').scroll(0, 0);
+        }
     }
 
-    toggleNav() {
-        this.setState({
-            isNavOpen: !this.state.isNavOpen
-        });
+    const handleClick = (ref) => {
+        setNav(false);
+        scrollToRef(ref);
     }
 
-    render() {
-        return(
-            <Navbar id='navbar' dark expand="md">
-                <NavbarToggler onClick={this.toggleNav} />
+    return(
+        <Navbar id='navbar' dark expand="md">
+            <NavbarToggler onClick={() => setNav(!navState)} />
 
-                <Collapse isOpen={this.state.isNavOpen} navbar>
-                    <Nav className='m-auto' navbar>
-                        <NavItem>
-                            <NavLink className="nav-link me-3" to="/portfolio">
-                                Portfolio
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link me-3" to="/skills">
-                                Skills
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link me-3" to="/experience">
-                                Experience
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to="/records">
-                                Records
-                            </NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        );
-    }
+            <Collapse isOpen={navState} navbar>
+                <Nav className='m-auto' navbar>
+                    <NavItem>
+                        <NavLink className="nav-link me-3" onClick={() => handleClick()}>
+                            Home
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link me-3" onClick={() => handleClick(props.portfolioRef)}>
+                            Portfolio
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link me-3" onClick={() => handleClick(props.skillsRef)}>
+                            Skills
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link me-3" onClick={() => handleClick(props.experienceRef)}>
+                            Experience
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className="nav-link" onClick={() => handleClick(props.recordsRef)}>
+                            Records
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
+    );
 }
 
 export default Header;

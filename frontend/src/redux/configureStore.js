@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import { projectsReducer } from './projectsReducer';
-import { recordsReducer } from './recordsReducer';
+import { filesReducer } from './filesReducer';
 
 const reducer = {
     projects: projectsReducer,
-    records: recordsReducer
+    files: filesReducer
 }
 
 export const ConfigureStore = () => {

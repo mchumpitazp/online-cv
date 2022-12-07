@@ -1,6 +1,6 @@
-export const ADD_RECORDS = 'ADD_RECORDS';
-export const RECORDS_LOADING = 'RECORDS_LOADING';
-export const RECORDS_FAILED = 'RECORDS_FAILED';
+export const ADD_FILES = 'ADD_FILES';
+export const FILES_LOADING = 'FILES_LOADING';
+export const FILES_FAILED = 'FILES_FAILED';
 
 export const ADD_PROJECTS = 'ADD_PROJECTS';
 export const PROJECTS_LOADING = 'PROJECTS_LOADING';
