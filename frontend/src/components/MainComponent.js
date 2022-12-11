@@ -40,8 +40,8 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchFiles();
         this.props.fetchProjects();
+        this.props.fetchFiles();
     }
 
     render() {

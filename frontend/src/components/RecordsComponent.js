@@ -17,7 +17,7 @@ function Records(props) {
             const recSource = (rec.source.startsWith('files/')) ? `${baseUrl}${rec.source}` : rec.source
             
             return(
-                <a key={rec.id} className="link-colored-secondary" href={recSource} target="_blank" rel="noopener noreferrer">
+                <a key={rec._id} className="link-colored-secondary" href={recSource} target="_blank" rel="noopener noreferrer">
                     <h4>
                     <small className='me-2'><i className="fa fa-link fa-lg"></i></small>
                     {rec.name}

@@ -43,7 +43,7 @@ function Portfolio(props) {
             return(
                 <Col className={'portfolio-child mt-3 ' + 
                                 (switchChecked? 'scaleup-container' : 'scaleup-img')}
-                    key={project.id}
+                    key={project._id}
                     xs='12' lg='6'
                     onMouseEnter={(e) => projectScaleUp(e, 'minus')}
                     onMouseLeave={(e) => projectScaleUp(e, 'plus')}
