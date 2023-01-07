@@ -72,7 +72,7 @@ class Intro extends React.Component {
     async initSubtitle() {
         const cursor  = this.subtitle.current.querySelector('#subtitle-cursor');
         const text    = this.subtitle.current.querySelector('#subtitle-text');
-        const textStr = "SOFTWARE DEVELOPER"
+        const textStr = "WEB DEVELOPER"
 
         for (let i = 0; i < 3; i++) {
             await new Promise((resolve) => setTimeout(() => {

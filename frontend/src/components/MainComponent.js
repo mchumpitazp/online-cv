@@ -36,7 +36,7 @@ class Main extends React.Component {
 
     constructor() {
         super();
-        this.state = { renderIntro: false };
+        this.state = { renderIntro: true };
     }
 
     componentDidMount() {
@@ -59,7 +59,7 @@ class Main extends React.Component {
                             experienceRef={this.experienceRef}
                             recordsRef={this.recordsRef} />
                     <Headline/>
-                    <Education bachelor={this.props.files.files.find((file) => file.name === 'bachelor')}/>
+                    <Education/>
                     <Portfolio projects={this.props.projects}
                                 inputRef={this.portfolioRef}/>
                     <Skills inputRef={this.skillsRef}/>

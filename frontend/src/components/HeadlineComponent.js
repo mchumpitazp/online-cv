@@ -9,7 +9,7 @@ function Headline() {
 
     React.useEffect(() => {   
         async function subtitleAnimation(i) {
-            let professions = ['SOFTWARE DEVELOPER', 'PROGRAMMER', 'ELECTRONICS ENGINEER'];
+            let professions = ['WEB DEVELOPER', 'PROGRAMMER', 'ELECTRONICS ENGINEER'];
             const profession = professions[i];
 
             while (subtitleRef.current.innerHTML !== "") {
@@ -42,12 +42,18 @@ function Headline() {
                         <h1>Mauro Polino</h1>
                         
                         <div id='subtitle' className='d-flex'>
-                            <span ref={subtitleRef} id="subtitle-text">SOFTWARE DEVELOPER</span>
+                            <span ref={subtitleRef} id="subtitle-text">WEB DEVELOPER</span>
                             <span>|</span>
                         </div>
                         
                         <p className='mt-3'>
-                            I am an electronics and software engineer specialized in Digital and Computational Systems and Web Development. My interests are programming languages applied to research or development, digital transformation and innovation, in addition, projects with a positive impact on the environment. My favorite field is web development where I am comfortable being full-stack, but a bit more pleasant with frontend. My hobbies are sports and continuous learning of programming languages.
+                        I am an electronics engineer and computer science enthusiast specialized in web development. In the past,
+                        I excelled in computer science courses for personal enjoyment and worked in a tech company, developing
+                        hardware and software solutions for mid and large scale projects. This learning journey motivated me to
+                        become a certified full-stack web developer with HTML5, CSS3, Django, MongoDB, Express, React and Node (MERN stack).
+                        On top of that, my major field is front-end with React, Redux and Bootstrap
+                            <i className='fa fa-smile-o p-1'></i>
+                            .
                         </p>
 
                         <Button onClick={() => openModal(true)} color='light' outline className='my-4 px-5 py-3'>
@@ -59,7 +65,7 @@ function Headline() {
                     </Col>
                     
                     <Col lg id='headline-portrait-container'>
-                        <img src={baseUrl + 'images/portrait.png'} alt='Portrait'/>
+                        <img src={baseUrl + '/images/portrait.png'} alt='Portrait'/>
                     </Col>
                 </Row>
                 

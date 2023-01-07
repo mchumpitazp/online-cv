@@ -7,7 +7,7 @@ function ModalProject(props) {
     if (props.project) {
         
         const tools = []
-        props.project.tools.map((tool, index) => {
+        props.project.tools.forEach((tool, index) => {
             let deviconSufix = '';
 
             if (tool.includes('-o')) {

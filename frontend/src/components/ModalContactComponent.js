@@ -8,7 +8,7 @@ function ModalContact(props) {
             <ModalBody>
                 <h5>
                     <i className='fa fa-envelope me-3'></i>
-                    mchumpitazp@gmail.com
+                    <a className='contact-modal-link' href="mailto:mchumpitazp@gmail.com">mchumpitazp@gmail.com</a>
                 </h5>
                 <h5 style={{'color': '#25d366'}}>
                     <i className="fa fa-whatsapp me-3"></i>

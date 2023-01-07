@@ -65,8 +65,63 @@ function Skills(props) {
     return(
         <Container id="skills" className="d-flex-gapped">
             <h2 ref={props.inputRef}><strong>Skills</strong></h2>
-            
+
             <Container className="my-3">
+                <div className="d-flex align-items-center">
+                    <h3 className="me-3">
+                        <small className="me-1"><i className="fa fa-lightbulb-o"></i></small>
+                        Tech Stack
+                    </h3>
+                    <div className="divider"></div>
+                </div>
+
+                <Row className="text-center mt-3">
+                    <Col>
+                        <h6 className="color-secondary">FRAMEWORKS</h6>
+                        <h5>React</h5>
+                        <h5>Redux</h5>
+                        <h5>Bootstrap</h5>
+                        <h5>Node</h5>
+                        <h5>Express</h5>
+                        <h5>Django</h5>
+                        <h5>OpenCV</h5>
+                    </Col>
+
+                    <Col>
+                        <h6 className="color-secondary">TOOLS & IDEs</h6>
+                        <h5>Git</h5>
+                        <h5>Azure VM</h5>
+                        <h5>Xcode</h5>
+                        <h5>Android<br/>Studio</h5>
+                        <h5>MATLAB</h5>
+                        <h5>VS Code</h5>
+                    </Col>
+
+                    <Col className="d-none d-lg-block">
+                        <h6 className="color-secondary">EMBEDDED SYSTEMS</h6>
+                        <h5>MPLAB X</h5>
+                        <h5>Atmel Studio</h5>
+                        <h5>KiCad</h5>
+                        <h5>Multisim</h5>
+                        <h5>Proteus</h5>
+                    </Col>
+                </Row>
+
+            </Container>
+
+            <Container className="my-3">
+                <div className="d-flex align-items-center">
+                    <h3 className="me-3">
+                        <small className="me-1"><i className="fa fa-code"></i></small>
+                        Coding
+                    </h3>
+                    <div className="divider"></div>
+                </div>
+
+                <RenderCodingLanguages />
+            </Container>
+
+            <Container className="mt-3">
                 <div className="d-flex align-items-center">
                     <h3 className="me-3">
                         <small className="me-1"><i className="fa fa-language"></i></small>
@@ -92,57 +147,6 @@ function Skills(props) {
 
             </Container>
 
-            <Container className="my-3">
-                <div className="d-flex align-items-center">
-                    <h3 className="me-3">
-                        <small className="me-1"><i className="fa fa-code"></i></small>
-                        Coding
-                    </h3>
-                    <div className="divider"></div>
-                </div>
-
-                <RenderCodingLanguages />
-            </Container>
-
-            <Container className="mt-3">
-                <div className="d-flex align-items-center">
-                    <h3 className="me-3">
-                        <small className="me-1"><i className="fa fa-lightbulb-o"></i></small>
-                        Knowledge
-                    </h3>
-                    <div className="divider"></div>
-                </div>
-
-                <Row className="text-center mt-3">
-                    <Col>
-                        <h6 className="color-secondary">FRAMEWORKS</h6>
-                        <h5>Bootstrap</h5>
-                        <h5>React</h5>
-                        <h5>NodeJS</h5>
-                        <h5>Redux</h5>
-                        <h5>Django</h5>
-                        <h5>OpenCV</h5>
-                    </Col>
-
-                    <Col>
-                        <h6 className="color-secondary">TOOLS & IDEs</h6>
-                        <h5>Git</h5>
-                        <h5>Xcode</h5>
-                        <h5>Android Studio</h5>
-                        <h5>MATLAB</h5>
-                    </Col>
-
-                    <Col className="d-none d-lg-block">
-                        <h6 className="color-secondary">EMBEDDED SYSTEMS</h6>
-                        <h5>MPLAB X</h5>
-                        <h5>Atmel Studio</h5>
-                        <h5>KiCad</h5>
-                        <h5>Multisim</h5>
-                        <h5>Proteus</h5>
-                    </Col>
-                </Row>
-
-            </Container>
         </Container>
     );
 }

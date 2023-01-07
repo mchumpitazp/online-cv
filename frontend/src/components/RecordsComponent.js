@@ -14,7 +14,7 @@ function Records(props) {
         });
 
         const records = recordsSorted.map((rec) => {
-            const recSource = (rec.source.startsWith('files/')) ? `${baseUrl}${rec.source}` : rec.source
+            const recSource = (rec.source.startsWith('/files/')) ? `${baseUrl}${rec.source}` : rec.source
             
             return(
                 <a key={rec._id} className="link-colored-secondary" href={recSource} target="_blank" rel="noopener noreferrer">

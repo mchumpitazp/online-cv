@@ -4,7 +4,7 @@ import { baseUrl } from '../shared/baseUrl';
 export const fetchProjects = () => (dispatch) => {
     dispatch(projectsLoading(true));
 
-    return fetch(baseUrl + 'projects/')
+    return fetch(baseUrl + '/projects/')
         .then(response => {
             if (response.ok) {
                 return response;
@@ -41,7 +41,7 @@ export const addProjects = (projects) => ({
 export const fetchFiles = () => (dispatch) => {
     dispatch(filesLoading(true));
 
-    return fetch(baseUrl + 'files/')
+    return fetch(baseUrl + '/files/')
         .then(response => {
             if (response.ok) {
                 return response;

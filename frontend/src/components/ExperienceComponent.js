@@ -13,7 +13,7 @@ function Experience(props) {
     
                 <h4>
                     <small className="me-2"><i className="fa fa-user"></i></small> 
-                    Technology Developer
+                    Tech Projects Developer
                 </h4>
     
                 <h4 className="color-secondary">
@@ -27,6 +27,18 @@ function Experience(props) {
                         Recomendation Letter
                     </h5>
                 </a>
+
+                <div className="d-flex">
+                    <h5 className="me-3">
+                        <i className="fa fa-calendar"></i>
+                        <small className="ms-1">Sep 2020 - Nov 2021</small>
+                    </h5>
+
+                    <h5 className="ms-3">
+                        <i className="fa fa-map-marker"></i>
+                        <small className="ms-1">Lima, Peru</small>
+                    </h5>
+                </div>
             </Container>
         );
     }

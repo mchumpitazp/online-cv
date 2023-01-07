@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar, NavbarToggler, Nav, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
 
 function Header(props) {
     const [navState, setNav] = React.useState(false);
@@ -23,8 +24,8 @@ function Header(props) {
         <Navbar id='navbar' dark expand="md">
             <NavbarToggler onClick={() => setNav(!navState)} />
 
-            <Collapse isOpen={navState} navbar>
-                <Nav className='m-auto' navbar>
+            <Nav className='m-auto' navbar>
+                <Collapse isOpen={navState} color="white" navbar>
                     <NavItem>
                         <NavLink className="nav-link me-3" onClick={() => handleClick()}>
                             Home
@@ -44,14 +45,16 @@ function Header(props) {
                         <NavLink className="nav-link me-3" onClick={() => handleClick(props.experienceRef)}>
                             Experience
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink className="nav-link" onClick={() => handleClick(props.recordsRef)}>
-                            Records
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-            </Collapse>
+                    </NavItem>    
+                </Collapse>        
+                <NavItem>
+                    <a className="nav-link me-4" href={`${baseUrl}/files/resume.pdf`} target="_blank" rel="noopener noreferrer"
+                        style={{color:'white'}}>
+                        Resume
+                    </a>
+                </NavItem>   
+            </Nav>    
+            
         </Navbar>
     );
 }
