@@ -3,6 +3,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var cors = require('./routes/cors');
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
@@ -29,7 +30,7 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-app.all('*', (req, res, next) => {
+app.all('*', cors.cors, (req, res, next) => {
   if (req.secure) {
     return next();
   }
