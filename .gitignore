@@ -1,4 +1,7 @@
 /json-server
 /mongodb
+/icons
+/certificate_bundle
+/ssh
 .DS_Store
 MauroVM_key.pem
