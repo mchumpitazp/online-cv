@@ -1,7 +1,4 @@
 /json-server
-/mongodb
-/icons
-/certificate_bundle
+/assets
 /ssh
 .DS_Store
-MauroVM_key.pem
