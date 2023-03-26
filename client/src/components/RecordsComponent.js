@@ -1,6 +1,6 @@
 import { Container } from "reactstrap";
-import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
+import { baseUrl } from "../shared/baseUrl";
 
 function Records(props) {
     if (!props.records) {

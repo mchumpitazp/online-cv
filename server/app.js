@@ -3,7 +3,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cors = require('./routes/cors');
+var helmet = require('helmet');
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
@@ -18,15 +18,13 @@ const Project = require('./models/projects');
 const File = require('./models/files');
 
 // connect to mongodb and port
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 connectToDatabase().then((_) => {
   app.listen(PORT, (_) => {
     console.log(`Server started on port ${PORT}`);
     console.log(app.get('env'));
   });
 });
-
-var indexRouter = require('./routes/index');
 
 var app = express();
 
@@ -39,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', indexRouter);
+app.use(helmet());
 app.use('/api/files', fileRouter);
 app.use('/api/projects', projectRouter);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import ModalContact from './ModalContactComponent';
 import { baseUrl } from '../shared/baseUrl';
+import ModalContact from './ModalContactComponent';
 
 function Headline() {
     const subtitleRef = React.useRef(null);

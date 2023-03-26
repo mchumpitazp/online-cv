@@ -7,7 +7,7 @@ function CarouselProject(props) {
     const [animating, setAnimating] = React.useState(false);
         
     const items = []
-    props.project.images.map((imgUrl, index) => {
+    props.project.images.forEach((imgUrl, index) => {
         items.push({
             key: index,
             src: baseUrl + imgUrl,

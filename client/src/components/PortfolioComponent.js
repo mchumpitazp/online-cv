@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap";
-import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
 import ModalProject from './ModalProjectComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function Portfolio(props) {
     const [switchChecked, setSwitch] = React.useState(true);

@@ -12,7 +12,7 @@ function Education(props) {
                 <div className="d-flex">
                     <h4 className="me-2">BSc Electronics Engineering</h4>
 
-                    <a className="link-colored-secondary" href={`${baseUrl}/files/bachelor.pdf`} target="_blank" rel="noopener noreferrer">
+                    <a className="link-colored-secondary" href={baseUrl + '/files/bachelor.pdf'} target="_blank" rel="noopener noreferrer">
                         <h4><small><i className="fa fa-link fa-lg"></i></small></h4>
                     </a>
                 </div>

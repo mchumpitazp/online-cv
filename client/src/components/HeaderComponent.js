@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Nav, Collapse, NavItem } from 'reactstrap';
+import { Navbar, NavbarToggler, Nav, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -48,7 +48,7 @@ function Header(props) {
                     </NavLink>
                 </NavItem>
                 <NavItem> 
-                    <a className="nav-link mx-3 d-none d-md-block" href={`${baseUrl}/files/resume.pdf`} target="_blank" rel="noopener noreferrer"
+                    <a className="nav-link mx-3 d-none d-md-block" href={baseUrl + '/files/resume.pdf'} target="_blank" rel="noopener noreferrer"
                         style={{color:'white'}}>
                         Resume
                     </a>
@@ -56,7 +56,7 @@ function Header(props) {
             </Nav>    
             </Collapse>
 
-            <a className="nav-link my-2 ms-3 me-auto d-block d-md-none" href={`${baseUrl}/files/resume.pdf`} target="_blank" rel="noopener noreferrer"
+            <a className="nav-link my-2 ms-3 me-auto d-block d-md-none" href={baseUrl + '/files/resume.pdf'} target="_blank" rel="noopener noreferrer"
                 style={{color:'white'}}>
                 Resume
             </a>
