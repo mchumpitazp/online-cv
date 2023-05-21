@@ -1,66 +1,74 @@
 import React from 'react';
-import { Navbar, NavbarToggler, Nav, Collapse, NavItem } from 'reactstrap';
+import { Navbar, Nav, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { baseUrl } from '../shared/baseUrl';
+import LetterWrap from './LetterWrapComponent';
+import $ from 'jquery';
 
-function Header(props) {
-    const [navState, setNav] = React.useState(false);
+function Header (props) {
+    const wordsEn = ['mauro', 'work', 'contact'];
+    const wordsRu = ['мауро', 'проекты', 'контакт'];
+    const words = props.language === 'en' ? wordsEn : wordsRu;
 
-    const scrollToRef = (ref) => {
-        if (ref) {
-            ref.current.scrollIntoView({behavior: 'auto'});
-            document.querySelector('#root').scrollBy(0, -(1.5 * ref.current.clientHeight));
-        } else {
-            document.querySelector('#root').scroll(0, 0);
+    React.useEffect(() => {
+        const introAnimation = () => {
+            setTimeout(() => {
+                let words = $('.letter-wrap__word');
+                let index = 0;
+    
+                let delay = setInterval(() => {
+                    if (index <= 3) {
+                        $(words[index]).addClass('hover');
+                        index++;
+                    } else {
+                        clearInterval(delay);
+                        $('.letter-wrap__word').removeClass('hover');
+                    }
+                }, 150);
+            }, 1000);
         }
+
+        introAnimation();
+    }, []);
+
+    const textEnter = () => {
+        props.setCursorVariant('text');
+        props.setCursorOffset(20);
     }
 
-    const handleClick = (ref) => {
-        setNav(false);
-        scrollToRef(ref);
+    const textLeave = () => {
+        props.setCursorVariant('default');
+        props.setCursorOffset(6);
     }
 
     return(
-        <Navbar id='navbar' dark expand="md">
-            <NavbarToggler onClick={() => setNav(!navState)} />
-            
-            <Collapse isOpen={navState} navbar>
-                
-            <Nav className='m-auto' navbar>
-                <NavItem>
-                    <NavLink className="nav-link mx-3" onClick={() => handleClick()}>
-                        Home
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink className="nav-link mx-3" onClick={() => handleClick(props.portfolioRef)}>
-                        Portfolio
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink className="nav-link mx-3" onClick={() => handleClick(props.skillsRef)}>
-                        Skills
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink className="nav-link mx-3" onClick={() => handleClick(props.experienceRef)}>
-                        Experience
-                    </NavLink>
-                </NavItem>
-                <NavItem> 
-                    <a className="nav-link mx-3 d-none d-md-block" href={baseUrl + '/files/resume.pdf'} target="_blank" rel="noopener noreferrer"
-                        style={{color:'white'}}>
-                        Resume
-                    </a>
-                </NavItem>
-            </Nav>    
-            </Collapse>
-
-            <a className="nav-link my-2 ms-3 me-auto d-block d-md-none" href={baseUrl + '/files/resume.pdf'} target="_blank" rel="noopener noreferrer"
-                style={{color:'white'}}>
-                Resume
-            </a>
-        </Navbar>
+        <React.Fragment>
+            <Navbar dark expand="xs">
+                <Nav navbar>
+                    <NavItem className='me-auto p-2'
+                            onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                            <LetterWrap word={words[0]} section={'header'}/>
+                    </NavItem>
+                    <NavItem className='d-none d-md-block'>
+                        <a className="nav-link" href="#portfolio"
+                            onMouseEnter={textEnter} onMouseLeave={textLeave} >
+                            <LetterWrap word={words[1]} section={'header'}/>
+                        </a>
+                    </NavItem>
+                    {/* <NavItem className='d-none d-md-block'>
+                        <NavLink className="nav-link ms-3" onClick={() => handleClick(props.skillsRef)}
+                            onMouseEnter={textEnter} onMouseLeave={textLeave} >
+                            <LetterWrap word={words[2]} section={'header'}/>
+                        </NavLink>
+                    </NavItem> */}
+                    <NavItem>
+                        <NavLink className="nav-link ms-4" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                            onMouseEnter={textEnter} onMouseLeave={textLeave} >
+                            <LetterWrap word={words[2]} section={'header'}/>
+                        </NavLink>
+                    </NavItem>
+                </Nav>    
+            </Navbar>
+        </React.Fragment>
     );
 }
 

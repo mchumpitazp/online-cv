@@ -1,87 +1,99 @@
-import React from 'react';
-import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap";
-import Loading from './LoadingComponent';
-import ModalProject from './ModalProjectComponent';
+import React from "react";
 import { baseUrl } from '../shared/baseUrl';
 
-function Portfolio(props) {
-    const [switchChecked, setSwitch] = React.useState(true);
-    const [currProject, setProject] = React.useState(null);
-    const [isModalOpen, setModal] = React.useState(false);
+function Portfolio (props) {
+    const NUM_PROJECTS = 3;
+    const portfolioRef = React.useRef(null);
+    const trackRef = React.useRef(null);
+    const listRef = React.useRef(null);
 
-    function projectScaleUp(e, action) {
-        const project = e.target.closest('.portfolio-child');
-        if (project.classList.contains('scaleup-container')) {
-            project.style.animationName = action + '-padding';
-            project.style.animationPlayState = 'running';
+    // Scrolling stuff
+    React.useEffect(() => {
+        // Brute force of handling Track
+        // const handleTrack = () => {
+        //     if (window.innerWidth < 576) {
+        //         trackRef.current.style.height = (NUM_PROJECTS * 120) + "vw";
+        //     } else if (window.innerWidth < 992) {
+        //         trackRef.current.style.height = (NUM_PROJECTS * 100) + "vw";
+        //     } else {
+        //         trackRef.current.style.height = (NUM_PROJECTS * 80) + "vw";
+        //     }
+        // }
+        // handleTrack();
+
+        // When scrolling Track
+        trackRef.current.style.height = (NUM_PROJECTS * 100) + "vw";
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const scrollTop = portfolioRef.current.offsetTop;
+            console.log(scrollY + " " + scrollTop);
+            const vw = 0.01 * Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            const scrollX = (vw * 0.93) * (NUM_PROJECTS - 1);
+            const val = scrollY - scrollTop;
+            console.log(val);
+
+            if (scrollY >= scrollTop && val < scrollX) {
+                listRef.current.style.transform = `translate3d(-${val}px, 0px, 0px)`
+            }
         }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Cursor variant
+    const projectEnter = () => {
+        props.setCursorVariant('project');
+        props.setCursorText('SEE CASE');
+        props.setCursorOffset(77);
+    }
+    const projectLeave = () => {
+        props.setCursorVariant('default');
+        props.setCursorText('');
+        props.setCursorOffset(6);
     }
 
-    function toggleModal(project) {
-        setModal(!isModalOpen);
-        setProject(project);
-    }
+    // Get projects
+    const projectsSorted = [...props.projects.projects];
 
-    if (props.projects.isLoading) {
-        return( <Loading /> );
-    } 
-    else if (props.projects.errMess) {
+    projectsSorted.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+
+    // Get mobile image
+    const getMobileImage = (image) => (image.slice(0, -4) + "-mobile" + image.slice(-4));
+    const getTabletImage = (image) => (image.slice(0, -4) + "-tablet" + image.slice(-4));
+
+    const projects = projectsSorted.map(project => {
         return(
-            <Container>
-                <h4>{props.projects.errMess}</h4>
-            </Container>
+            <div className="portfolio__projects-item" key={project.name} >
+                <a href={project.url} onMouseEnter={projectEnter} onMouseLeave={projectLeave} target="_blank" rel="noopener noreferrer">
+                    <img className='portfolio__projects-img d-none d-xl-block'
+                        src={baseUrl + project.image}
+                        alt={project.name}/>
+                    <img className='portfolio__projects-img d-none d-sm-block d-xl-none'
+                        src={baseUrl + getTabletImage(project.image)}
+                        alt={project.name}/>
+                    <img className='portfolio__projects-img d-block d-sm-none'
+                        src={baseUrl + getMobileImage(project.image)}
+                        alt={project.name}/>
+                </a>
+            </div>
         );
-    }
-    else {
-        const projectsSorted = [...props.projects.projects];
+    });
 
-        projectsSorted.sort((a, b) => {
-            return new Date(b.date) - new Date(a.date);
-        });
-        
-        const projects = projectsSorted.map((project) => {
-            return(
-                <Col className={'portfolio-child mt-3 ' + 
-                                (switchChecked? 'scaleup-container' : 'scaleup-img')}
-                    key={project._id}
-                    xs='12' lg='6'
-                    onMouseEnter={(e) => projectScaleUp(e, 'minus')}
-                    onMouseLeave={(e) => projectScaleUp(e, 'plus')}
-                    onClick={() => toggleModal(project)}>
-
-                    <div className='project-img-container'>
-                        <img className='project-img'
-                            src={baseUrl + project.images[0]}
-                            alt={project.name}/>
+    return (
+        <section id="portfolio" ref={portfolioRef}>
+            <div id="portfolio__vertical" ref={trackRef}>
+                <div id="portfolio__horizontal">
+                    <div id="portfolio__projects" role="list" ref={listRef}>
+                        {projects}
                     </div>
-                    <h6 className='project-category'>{project.category}</h6>
-                    <h3 className='project-name'><strong>{project.name}</strong></h3>
-                </Col>
-            );
-        });
-
-        return(
-            <Container id='portfolio' className='d-flex-gapped'>
-                <div className='d-flex align-items-center'>
-                    <h2 ref={props.inputRef} className='me-3'><strong>Portfolio</strong></h2>
-
-                    <FormGroup switch>
-                        <Input type='switch' role='switch' defaultChecked
-                                onClick={() => {setSwitch(!switchChecked)}}/>
-                        <Label check><small>Scale up</small></Label>
-                    </FormGroup>
                 </div>
-                
-                <Row className='text-center'>
-                    {projects}
-                </Row>
-
-                <ModalProject isOpen={isModalOpen} 
-                        toggle={() => toggleModal(null)}
-                        project={currProject}/>
-            </Container>
-        );
-    }
+            </div>
+        </section>
+    );
 }
 
 export default Portfolio;

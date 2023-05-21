@@ -9,13 +9,13 @@ mongoose.set('strictQuery', true);
 
 var connectToDatabase = require('./dbConfig');
 
-// routers
-var fileRouter = require('./routes/filesRouter');
+// Routers
 var projectRouter = require('./routes/projectsRouter');
+//var fileRouter = require('./routes/filesRouter');
 
-// temp models
+// Temp Models
 const Project = require('./models/projects');
-const File = require('./models/files');
+//const File = require('./models/files');
 
 // connect to mongodb and port
 const PORT = process.env.PORT || 3003;
@@ -38,8 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(helmet());
-app.use('/api/files', fileRouter);
 app.use('/api/projects', projectRouter);
+//app.use('/api/files', fileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

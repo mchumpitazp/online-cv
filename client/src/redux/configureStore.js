@@ -1,5 +1,5 @@
+//import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
 import { projectsReducer } from './projectsReducer';
 import { filesReducer } from './filesReducer';
 
@@ -12,7 +12,7 @@ export const ConfigureStore = () => {
 
     const store = configureStore({
         reducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware() //.concat(logger)
     });
 
     return store;

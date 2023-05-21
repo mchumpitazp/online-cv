@@ -7,18 +7,33 @@ const projectSchema = new Schema({
         required: true,
         unique: true
     },
-    url: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    image: {
+    images: [
+        {
             type: String,
             required: true,
+        }
+    ],
+    category: {
+        type: String,
+        required: true
+    },
+    tools: [
+        {
+            type: String,
+            required: true
+        }
+    ],
+    description: {
+        type: String,
+        required: true
+    },
+    source: {
+        type: String,
+        required: true
     },
     date: {
         type: String,
-        required: true,
+        required: true
     }
 });
 

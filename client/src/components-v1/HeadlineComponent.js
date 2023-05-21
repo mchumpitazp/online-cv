@@ -43,7 +43,7 @@ function Headline() {
                         
                         <div id='subtitle' className='d-flex'>
                             <span ref={subtitleRef} id="subtitle-text">WEB DEVELOPER</span>
-                            <span>|</span>
+                            <span id='subtitle-slash'>|</span>
                         </div>
                         
                         <p className='mt-3'>

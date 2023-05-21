@@ -1,28 +1,78 @@
 import React from 'react';
-import ModalContact from './ModalContactComponent';
+import LetterWrap from './LetterWrapComponent';
 
-function Footer() {
-    const [isModalOpen, openModal] = React.useState(false);
+function Footer (props) {
+    if (props.language === 'en') {
+        var title = "let's work together?";
+        var subtitle = "Send an email to";
+        var toTop = 'back to top';
+    } else {
+        title = "давайте работать?";
+        subtitle = "Отправьте письмо по адресу";
+        toTop = 'на вершину';
+    }
 
-    return(
-        <React.Fragment>
-            <footer className="py-2 px-4">
-                <div id="footer-copyrights">
-                    <h6 className="m-0">&copy; 2022 Mauro Chumpitaz Polino</h6> 
-                </div>
+    const backToTop = () => window.scrollTo(0, 0);
 
-                <div id="footer-links">
-                    <h3><i onClick={() => openModal(true)} className="fa fa-envelope fa-lg"></i></h3>
+    const emailEnter = () => {
+        document.getElementById('cursorText').classList.add('email');
+        props.setCursorVariant('email');
+        props.setCursorText('👋🏼');
+        props.setCursorOffset(30);
+    }
+    const textEnter = () => {
+        props.setCursorVariant('text');
+        props.setCursorOffset(20);
+    }
+    const mouseLeave = () => {
+        document.getElementById('cursorText').classList.remove('email'); // if was email
+        props.setCursorVariant('default');
+        props.setCursorText('');
+        props.setCursorOffset(6);
+    }
 
-                    <a href="https://github.com/mchumpitazp" className="ms-3" target="_blank" rel="noopener noreferrer">
-                        <h3><i className="fa fa-github fa-lg"></i></h3>
+    return (
+        <footer className='d-flex justify-content-center'>
+            <div id='footer-email' className='d-flex flex-column justify-content-center align-items-center'>
+                <a href="mailto:mauro@polino.ru" className='text-center'>
+                    <span id='footer-email__title' data-aos="fade"
+                        onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
+                        {title}
+                    </span>
+                </a>
+                
+                <span id='footer-email__subtitle' className='text-center' data-aos="fade">
+                    <span>{subtitle}</span>
+                    &nbsp;
+                    <u id='footer-email__email' href="mailto:mauro@polino.ru" className='py-3' onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
+                        mauro@polino.ru
+                    </u>
+                </span>
+            </div>
+                
+            <div id='footer-nav' className='d-flex justify-content-between'>
+                <div id='footer-nav__socials' className='d-flex gap-5'>
+                    <a href='https://wa.me/79251849503' target="_blank" rel="noopener noreferrer" 
+                        onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
+                        <LetterWrap word={'whatsapp'} section={'footer'}/>
+                    </a>
+                    
+                    <a href='https://github.com/mchumpitazp' className='d-none d-md-block' target="_blank" rel="noopener noreferrer"
+                        onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
+                        <LetterWrap word={'github'} section={'footer'}/>
                     </a>
                 </div>
-            </footer>
 
-            <ModalContact isOpen={isModalOpen} toggle={() => openModal(false)} />
-        </React.Fragment>
-    );
+                <div id='footer-nav__btn-top' onClick={backToTop}
+                    onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
+                    <span className='letter-wrap__word'>
+                        <span>{toTop}</span>
+                        <i className='fa fa-long-arrow-up ps-2 pt-1'></i>
+                    </span>
+                </div>
+            </div>
+        </footer>
+    )
 }
 
 export default Footer;

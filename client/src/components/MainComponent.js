@@ -1,77 +1,84 @@
 import React from 'react';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Components
 import Intro from './IntroComponent';
+import Cursor from './CursorComponent';
 import Header from './HeaderComponent';
-import Headline from './HeadlineComponent';
-import Education from './EducationComponent';
+import Hero from './HeroComponent';
+import About from './AboutComponent';
 import Portfolio from './PortfolioComponent';
-import Skills from './SkillsComponent';
-import Experience from './ExperienceComponent';
-import Records from './RecordsComponent';
 import Footer from './FooterComponent';
 
 // Redux
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchProjects, fetchFiles } from '../redux/ActionCreators';
 
-const mapStateToProps = state => {
-    return {
-        projects: state.projects,
-        files: state.files
-    }
-};
+function Main () {
+    // Redux
+    const dispatch = useDispatch();
+    const projects = useSelector(state => state.projects);
+    //const files = useSelector(state => state.files);
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchProjects: () => {dispatch(fetchProjects())},
-    fetchFiles: () => {dispatch(fetchFiles())}
-});
+    // States
+    const [cursorVariant, setCursorVariant] = React.useState('default');
+    const [cursorText, setCursorText] = React.useState('');
+    const [cursorOffset, setCursorOffset] = React.useState(6);
+    const [language, setLanguage] = React.useState('en');
+    const [renderIntro, setRenderIntro] = React.useState(true);
 
-class Main extends React.Component {
+    // Section References
+    const skillsRef = React.useRef();
+    const experienceRef = React.useRef();
+    const recordsRef = React.useRef();
 
-    portfolioRef = React.createRef();
-    skillsRef = React.createRef();
-    experienceRef = React.createRef();
-    recordsRef = React.createRef();
+    React.useEffect(() => {
+        dispatch(fetchProjects());
+        //dispatch(fetchFiles());
+        AOS.init({
+            once: false,
+            mirror: true
+        });
+        AOS.refresh();
 
-    constructor() {
-        super();
-        this.state = { renderIntro: true };
-    }
+        // Preload portrait
+        const portrait = new Image();
+        portrait.src = '/portrait.jpg';
+    }, [dispatch]);
 
-    componentDidMount() {
-        this.props.fetchProjects();
-        this.props.fetchFiles();
-    }
-
-    render() {
-        if (this.state.renderIntro) {
-            return (
-                <Intro unmount={() => this.setState({renderIntro: false})} /> 
-            )
-        } else {
-            document.getElementById('root').style.overflowY = 'auto';
-
-            return (
-                <React.Fragment>
-                    <Header portfolioRef={this.portfolioRef}
-                            skillsRef={this.skillsRef}
-                            experienceRef={this.experienceRef}
-                            recordsRef={this.recordsRef} />
-                    <Headline/>
-                    <Education/>
-                    <Portfolio projects={this.props.projects}
-                                inputRef={this.portfolioRef}/>
-                    <Skills inputRef={this.skillsRef}/>
-                    <Experience letter={this.props.files.files.find((file) => file.name === 'cita-letter')} 
-                                inputRef={this.experienceRef}/>
-                    <Records records={this.props.files.files.filter((file) => file.record === true)}
-                             inputRef={this.recordsRef} />
-                    <Footer />
-                </React.Fragment>
-            )
-        }
+    if (renderIntro) {
+        return (
+            <Intro unmount={() => setRenderIntro(false)} /> 
+        )
+    } else {
+        return (
+            <React.Fragment>
+                <Cursor cursorVariant={cursorVariant}
+                        cursorText={cursorText}
+                        cursorOffset={cursorOffset} />
+                <Header skillsRef={skillsRef}
+                        experienceRef={experienceRef}
+                        recordsRef={recordsRef}
+                        language={language}
+                        setCursorVariant={setCursorVariant}
+                        setCursorOffset={setCursorOffset} />
+                <Hero language={language} setLanguage={setLanguage} />
+                <About language={language} setLanguage={setLanguage}
+                        setCursorVariant={setCursorVariant}
+                        setCursorOffset={setCursorOffset} />
+                <Portfolio projects={projects}
+                        setLanguage={setLanguage}
+                        setCursorVariant={setCursorVariant}
+                        setCursorText={setCursorText}
+                        setCursorOffset={setCursorOffset} />
+                <Footer language={language}
+                        setCursorVariant={setCursorVariant}
+                        setCursorText={setCursorText}
+                        setCursorOffset={setCursorOffset} />
+            </React.Fragment>
+        )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
