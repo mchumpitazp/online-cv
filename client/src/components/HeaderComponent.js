@@ -10,6 +10,9 @@ function Header (props) {
     const words = props.language === 'en' ? wordsEn : wordsRu;
 
     React.useEffect(() => {
+        const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+        if (isTouchDevice()) $('.navbar').addClass('touch-screen');
+        
         const introAnimation = () => {
             setTimeout(() => {
                 let words = $('.letter-wrap__word');
@@ -42,14 +45,14 @@ function Header (props) {
 
     return(
         <React.Fragment>
-            <Navbar dark expand="xs">
+            <Navbar dark expand="xs" className='p-4'>
                 <Nav navbar>
-                    <NavItem className='me-auto p-2'
+                    <NavItem className='text-nav me-auto py-2'
                             onMouseEnter={textEnter} onMouseLeave={textLeave}>
                             <LetterWrap word={words[0]} section={'header'}/>
                     </NavItem>
                     <NavItem className='d-none d-md-block'>
-                        <a className="nav-link" href="#portfolio"
+                        <a className="nav-link text-nav" href="#portfolio"
                             onMouseEnter={textEnter} onMouseLeave={textLeave} >
                             <LetterWrap word={words[1]} section={'header'}/>
                         </a>
@@ -61,7 +64,7 @@ function Header (props) {
                         </NavLink>
                     </NavItem> */}
                     <NavItem>
-                        <NavLink className="nav-link ms-4" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                        <NavLink className="nav-link text-nav ms-5" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
                             onMouseEnter={textEnter} onMouseLeave={textLeave} >
                             <LetterWrap word={words[2]} section={'header'}/>
                         </NavLink>

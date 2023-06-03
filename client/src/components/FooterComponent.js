@@ -42,7 +42,7 @@ function Footer (props) {
                 </a>
                 
                 <span id='footer-email__subtitle' className='text-center' data-aos="fade">
-                    <span>{subtitle}</span>
+                    <span className='d-inline-block'>{subtitle}</span>
                     &nbsp;
                     <u id='footer-email__email' href="mailto:mauro@polino.ru" className='py-3' onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
                         mauro@polino.ru
@@ -50,14 +50,14 @@ function Footer (props) {
                 </span>
             </div>
                 
-            <div id='footer-nav' className='d-flex justify-content-between'>
+            <div id='footer-nav' className='d-flex justify-content-between p-4'>
                 <div id='footer-nav__socials' className='d-flex gap-5'>
                     <a href='https://wa.me/79251849503' target="_blank" rel="noopener noreferrer" 
-                        onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
+                        className='text-md' onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
                         <LetterWrap word={'whatsapp'} section={'footer'}/>
                     </a>
                     
-                    <a href='https://github.com/mchumpitazp' className='d-none d-md-block' target="_blank" rel="noopener noreferrer"
+                    <a href='https://github.com/mchumpitazp' className='text-md d-none d-md-block' target="_blank" rel="noopener noreferrer"
                         onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
                         <LetterWrap word={'github'} section={'footer'}/>
                     </a>
@@ -65,7 +65,7 @@ function Footer (props) {
 
                 <div id='footer-nav__btn-top' onClick={backToTop}
                     onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
-                    <span className='letter-wrap__word'>
+                    <span className='letter-wrap__word text-md'>
                         <span>{toTop}</span>
                         <i className='fa fa-long-arrow-up ps-2 pt-1'></i>
                     </span>

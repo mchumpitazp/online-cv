@@ -1,6 +1,7 @@
 import React from 'react';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import $ from 'jquery';
 
 // Components
 import Intro from './IntroComponent';
@@ -8,7 +9,8 @@ import Cursor from './CursorComponent';
 import Header from './HeaderComponent';
 import Hero from './HeroComponent';
 import About from './AboutComponent';
-import Portfolio from './PortfolioComponent';
+import PortfolioSlider from './PortfolioSliderComponent';
+import PortfolioList from './PortfolioListComponent';
 import Footer from './FooterComponent';
 
 // Redux
@@ -27,11 +29,14 @@ function Main () {
     const [cursorOffset, setCursorOffset] = React.useState(6);
     const [language, setLanguage] = React.useState('en');
     const [renderIntro, setRenderIntro] = React.useState(true);
+    const [darkMode, setDarkMode] = React.useState(false);
 
     // Section References
     const skillsRef = React.useRef();
     const experienceRef = React.useRef();
     const recordsRef = React.useRef();
+
+    const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 
     React.useEffect(() => {
         dispatch(fetchProjects());
@@ -41,6 +46,16 @@ function Main () {
             mirror: true
         });
         AOS.refresh();
+
+        // CSS
+        if (isTouchDevice()) {
+            $('.text-sm').addClass('touch-screen');
+            $('.text-md').addClass('touch-screen');
+            $('.text-nav').addClass('touch-screen');
+            $('.text-btn').addClass('touch-screen');
+            $('#hero').addClass('touch-screen');
+            $('#about').addClass('touch-screen');
+        }
 
         // Preload portrait
         const portrait = new Image();
@@ -54,24 +69,41 @@ function Main () {
     } else {
         return (
             <React.Fragment>
-                <Cursor cursorVariant={cursorVariant}
-                        cursorText={cursorText}
-                        cursorOffset={cursorOffset} />
+                {   
+                    !isTouchDevice() && 
+                    <Cursor cursorVariant={cursorVariant}
+                            cursorText={cursorText}
+                            cursorOffset={cursorOffset}
+                            darkMode={darkMode} />
+                }
                 <Header skillsRef={skillsRef}
                         experienceRef={experienceRef}
                         recordsRef={recordsRef}
                         language={language}
                         setCursorVariant={setCursorVariant}
                         setCursorOffset={setCursorOffset} />
-                <Hero language={language} setLanguage={setLanguage} />
+                <Hero language={language} setLanguage={setLanguage}
+                        setCursorVariant={setCursorVariant}
+                        setCursorOffset={setCursorOffset}
+                        darkMode={darkMode} setDarkMode={setDarkMode} />
                 <About language={language} setLanguage={setLanguage}
                         setCursorVariant={setCursorVariant}
                         setCursorOffset={setCursorOffset} />
-                <Portfolio projects={projects}
+                {
+                    isTouchDevice() ?
+                    <PortfolioList projects={projects}
+                        setLanguage={setLanguage}
+                        setCursorVariant={setCursorVariant}
+                        setCursorText={setCursorText}
+                        setCursorOffset={setCursorOffset}
+                        darkMode={darkMode} />
+                    :
+                    <PortfolioSlider projects={projects}
                         setLanguage={setLanguage}
                         setCursorVariant={setCursorVariant}
                         setCursorText={setCursorText}
                         setCursorOffset={setCursorOffset} />
+                }
                 <Footer language={language}
                         setCursorVariant={setCursorVariant}
                         setCursorText={setCursorText}
