@@ -4,13 +4,15 @@ import LetterWrap from "./LetterWrapComponent";
 function About (props) {
     if (props.language === 'en') {
         var title = "about me";
-        var about = "I'm Mauro Polino. A freelance web developer, oriented to scalability and user experience insight. I am passionate about software solutions for process automation.";
-        var place = "Currently living in Moscow, Russia";
+        var about = ["I'm Mauro Polino.", "A freelance web developer, oriented to scalability and performance."];
+        //var about = ["I'm Mauro Polino.", "A freelance web developer, oriented to scalability and performance. I am passionate about software solutions for process automation."];
+        var place = "Living in Moscow, Russia";
         var work = 'explore work';
     } else {
         title = "обо мне";
-        about = "Я Мауро Полино. Веб-разработчик-фрилансер, ориентированный на масштабируемость. Я увлечен программными решениями для автоматизации.";
-        place = "В настоящее время живу в Москве, Россия";
+        //about = ["Я Мауро Полино.", "Веб-разработчик-фрилансер, ориентированный на масштабируемость. Я увлечен программными решениями для автоматизации."];
+        about = ["Я Мауро Полино.", "Веб-разработчик, ориентированный на масштабируемость и производительность."];
+        place = "Живу в Москве, Россия";
         work = 'исследуйте работу';
     }
 
@@ -37,12 +39,10 @@ function About (props) {
             </span>
             {/* <span id="about__about" data-aos="fade">
                 I'm Mauro Polino. <span className="d-inline-block">A freelance</span> web developer oriented to scalability and user experience insight. <span className="d-inline-block">I am passionate</span> about software solutions for process optimization.</span> */}
-            <span id="about__info" className="text-center" data-aos="fade">{about}</span>
+            <span id="about__info" className="text-center" data-aos="fade">
+                {about[0]}<br/>{about[1]}
+            </span>
             <span id="about__place" data-aos="fade">{place}</span>
-            {/* <div className="letter-wrap__button" data-aos="fade" onClick={() => handleClick(props.portfolioRef)}
-                onMouseEnter={textEnter} onMouseLeave={textLeave} >
-                <LetterWrap word={work} section={'hero'}/>
-            </div> */}
             <a className="text-btn text-sm" data-aos="fade" href="#portfolio"
                 onMouseEnter={textEnter} onMouseLeave={textLeave} >
                 <LetterWrap word={work} section={'hero'}/>

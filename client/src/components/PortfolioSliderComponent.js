@@ -47,8 +47,8 @@ function PortfolioSlider (props) {
     });
 
     // Get mobile image
-    const getMobileImage = (image) => (image.slice(0, -4) + "-mobile" + image.slice(-4));
-    const getTabletImage = (image) => (image.slice(0, -4) + "-tablet" + image.slice(-4));
+    // const getMobileImage = (image) => (image.slice(0, -4) + "-mobile" + image.slice(-4));
+    // const getTabletImage = (image) => (image.slice(0, -4) + "-tablet" + image.slice(-4));
 
     const projects = projectsSorted.map(project => {
         return(

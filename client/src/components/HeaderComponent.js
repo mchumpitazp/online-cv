@@ -5,8 +5,8 @@ import LetterWrap from './LetterWrapComponent';
 import $ from 'jquery';
 
 function Header (props) {
-    const wordsEn = ['mauro', 'work', 'contact'];
-    const wordsRu = ['мауро', 'проекты', 'контакт'];
+    const wordsEn = ['mauro', 'work', 'contact', 'available', 'for work'];
+    const wordsRu = ['мауро', 'проекты', 'контакт', 'доступен', 'для работы'];
     const words = props.language === 'en' ? wordsEn : wordsRu;
 
     React.useEffect(() => {
@@ -52,24 +52,23 @@ function Header (props) {
                             <LetterWrap word={words[0]} section={'header'}/>
                     </NavItem>
                     <NavItem className='d-none d-md-block'>
-                        <a className="nav-link text-nav" href="#portfolio"
+                        <a className="nav-link text-nav me-5" href="#portfolio"
                             onMouseEnter={textEnter} onMouseLeave={textLeave} >
                             <LetterWrap word={words[1]} section={'header'}/>
                         </a>
                     </NavItem>
-                    {/* <NavItem className='d-none d-md-block'>
-                        <NavLink className="nav-link ms-3" onClick={() => handleClick(props.skillsRef)}
-                            onMouseEnter={textEnter} onMouseLeave={textLeave} >
-                            <LetterWrap word={words[2]} section={'header'}/>
-                        </NavLink>
-                    </NavItem> */}
                     <NavItem>
-                        <NavLink className="nav-link text-nav ms-5" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                        <NavLink className="nav-link text-nav" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
                             onMouseEnter={textEnter} onMouseLeave={textLeave} >
                             <LetterWrap word={words[2]} section={'header'}/>
                         </NavLink>
                     </NavItem>
                 </Nav>    
+                <div className='available'>
+                    <div className='available-text text-center text-nav' onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                        <span className='regular d-block'>{words[3]}</span> <span>{words[4]}</span>
+                    </div>
+                </div>
             </Navbar>
         </React.Fragment>
     );

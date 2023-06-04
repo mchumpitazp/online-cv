@@ -7,7 +7,6 @@ body {
     color: $my-color;
     background-color: $my-bg;
     font-family: 'Helvetica Neue', sans-serif;
-    height: 100vh;
 }
 
 // Custom Cursor
@@ -63,7 +62,7 @@ body {
     text-transform: uppercase;
     border: solid 0.5px;
     border-radius: 50px;
-    padding: 1vw;
+    padding: 0.7vw;
 }
 
 @media (max-width: 768px) {
@@ -81,20 +80,20 @@ body {
 // Tablet
 @media ((min-width: 576px) and (orientation: portrait)) or
         ((min-width: 992px) and (orientation: landscape)) {
-    .text-sm.touch-screen  { font-size: 1rem; }
-    .text-md.touch-screen  { font-size: 1.2rem; }
-    .text-nav.touch-screen { font-size: 1.3rem; }
+    .text-sm.touch-screen  { font-size: 0.8rem; }
+    .text-md.touch-screen  { font-size: 1rem; }
+    .text-nav.touch-screen { font-size: 1.2rem; }
     .text-btn.touch-screen { padding: 0.8rem 2.5rem; }
+    .text-tag.touch-screen { padding: 0.5vw; }
 }
 
 // iPad Pro
 @media (min-width: 992px) and (orientation: portrait) {
-    .text-sm.touch-screen  { font-size: 1.3rem; }
-    .text-md.touch-screen  { font-size: 1.5rem; }
-    .text-nav.touch-screen { font-size: 1.6rem; }
+    .text-sm.touch-screen  { font-size: 1rem; }
+    .text-md.touch-screen  { font-size: 1.2rem; }
+    .text-nav.touch-screen { font-size: 1.4rem; }
     .text-btn.touch-screen { padding: 1rem 3rem; }
 }
-
 
 
 // Introduction
@@ -170,6 +169,19 @@ body {
         color: inherit;
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+
+    .available {
+        position: absolute;
+        left: 50%;
+        transform:translate(-50%);
+        padding-top: 1.5rem;
+
+        .available-text {
+            font-weight: 300;
+            font-family: 'Viaoda Libre', sans-serif;
+            .regular { font-family: 'Helvetica Neue', sans-serif; }
+        }
     }
 }
 
@@ -256,8 +268,9 @@ body {
 // ------
 
 #about {
-    min-height: 100vh;
-    width: 100%;
+    height: fit-content;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
 
     font-weight: 300;
     gap: 2rem;
@@ -269,13 +282,13 @@ body {
     
     #about__info { 
         font-family: 'Viaoda Libre', sans-serif;
-        font-size: 2rem;
+        font-size: 3rem;
         width: 70vw;
     }
 
     #about__place {
         font-family: 'Viaoda Libre', sans-serif;
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 
     a { color: inherit; }
@@ -283,31 +296,31 @@ body {
 
 @media (max-width: 768px) {
     #about {
-        #about__info { font-size: 1.7rem; }
-        #about__place { font-size: 1.2rem; }
+        #about__info { font-size: 2.5rem; }
+        #about__place { font-size: 1.5rem; }
     }
 }
 
 // Mobile phone
 #about.touch-screen {
-    #about__info { font-size: 1.5rem; }
-    #about__place { font-size: 1rem; }
+    #about__info { font-size: 2rem; width: 90vw; }
+    #about__place { font-size: 1.3rem; }
 }
 
 // Tablet
 @media ((min-width: 576px) and (orientation: portrait)) or 
        ((min-width: 992px) and (orientation: landscape)) {
     #about.touch-screen {
-        #about__info { font-size: 2.2rem; }
-        #about__place { font-size: 1.5rem; }
+        #about__info { font-size: 3rem; width: 70vw; }
+        #about__place { font-size: 2rem; }
     }
 }
 
 // iPad Pro
 @media (min-width: 992px) and (orientation: portrait) {
     #about.touch-screen {
-        #about__info { font-size: 2.7rem; }
-        #about__place { font-size: 2rem; }
+        #about__info { font-size: 3.5rem; }
+        #about__place { font-size: 2.5rem; }
     }
 }
 
@@ -379,7 +392,6 @@ body {
 }
 
 #portfolio-list {
-    padding: 5vw;
     padding-right: 5vw;
     padding-left: 5vw;
     width: 100vw;
@@ -416,8 +428,7 @@ body {
                     font-size: 1.7rem;
                 }
 
-                .text-tag { width: 25vw; }
-                .portfolio-list__projects-item__toggler-info__tags { font-size: 0.5rem; }
+                .text-tag { width: 18vw; }
             }
 
             .portfolio-list__projects-item__expander {
@@ -487,7 +498,7 @@ body {
             .portfolio-list__projects-item__toggler-info {
                 .portfolio-list__projects-item__toggler-info__img { max-height: 55%; }
                 .portfolio-list__projects-item__toggler-info__title { font-size: 2.5rem; }
-                .portfolio-list__projects-item__toggler-info__tags { font-size: 0.8rem; }
+                .portfolio-list__projects-item__toggler-info__tags { font-size: 0.6rem; }
             }
             
             .portfolio-list__projects-item__expander { font-size: 4.5rem; }
@@ -507,10 +518,14 @@ body {
     }
 }
 
+@media (min-width: 978px) {
+    #portfolio-list .text-tag { width: 15vw !important; }
+}
+
 footer {
     position: relative;
-    height: 100vh;
-    width: 100%;
+    height: fit-content;
+    width: 100vw;    
 
     a { 
         color: inherit;
@@ -520,7 +535,8 @@ footer {
     a:hover { color: inherit; }
 
     #footer-email {
-        height: inherit;
+        margin-top: 12rem;
+        margin-bottom: 12rem;
         width: 80%;
         font-weight: 300;
 
@@ -536,9 +552,6 @@ footer {
     }
 
     #footer-nav {
-        position: absolute;
-        bottom: 0;
-        left: 0;
         width: 100%;
     }
 }

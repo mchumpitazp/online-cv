@@ -32,9 +32,9 @@ function Footer (props) {
     }
 
     return (
-        <footer className='d-flex justify-content-center'>
+        <footer className='d-flex flex-column align-items-center'>
             <div id='footer-email' className='d-flex flex-column justify-content-center align-items-center'>
-                <a href="mailto:mauro@polino.ru" className='text-center'>
+                <a href="mailto:mauro@polino.ru" className='text-center' target="_blank" rel="noopener noreferrer">
                     <span id='footer-email__title' data-aos="fade"
                         onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
                         {title}
@@ -44,9 +44,12 @@ function Footer (props) {
                 <span id='footer-email__subtitle' className='text-center' data-aos="fade">
                     <span className='d-inline-block'>{subtitle}</span>
                     &nbsp;
-                    <u id='footer-email__email' href="mailto:mauro@polino.ru" className='py-3' onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
-                        mauro@polino.ru
-                    </u>
+                    <a id='footer-email__email' href="mailto:mauro@polino.ru" target="_blank" rel="noopener noreferrer">
+                        <u className='py-3' onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
+                            mauro@polino.ru
+                        </u>
+                    </a>
+                    
                 </span>
             </div>
                 

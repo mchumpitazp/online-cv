@@ -10,7 +10,6 @@
     "aos": "^2.3.4",
     "bootstrap": "^5.2.2",
     "bootstrap-social": "^5.1.1",
-    "cross-fetch": "^3.1.5",
     "font-awesome": "^4.7.0",
     "framer-motion": "^10.12.10",
     "jquery": "^3.7.0",

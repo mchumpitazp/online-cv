@@ -6,11 +6,11 @@ function Hero (props) {
     if (props.language === 'en') {
         var english = 'en';
         var russian = 'ru';
-        var darkMode = 'dark mode';
+        var mode = ['dark mode', 'light mode'];
     } else {
         english = 'ан';
         russian = 'ру';
-        darkMode = 'чёрний моде';
+        mode = ['темный режим', 'светлый режим'];
     }
 
     React.useEffect(() => {
@@ -54,13 +54,19 @@ function Hero (props) {
             <div id="hero__footer" className="d-flex justify-content-between py-3 px-4">
                 <div className="text-md d-flex align-items-center" onMouseEnter={textEnter} onMouseLeave={textLeave} onClick={switchColors}>
                     <i className="fa fa-adjust pe-2"></i>
-                    <LetterWrap word={darkMode} section={'hero'} />
+                    {
+                        props.darkMode ?
+                        <LetterWrap word={mode[0]} section={'hero'} />
+                        :
+                        <LetterWrap word={mode[1]} section={'hero'} />
+                    }
+                    
                 </div>
                 <div> 
                     <span className="text-md" onClick={() => props.setLanguage('en')}>
                         <LetterWrap word={english} section={'hero'} />
                     </span>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span className="text-md px-2">|</span>
                     <span className="text-md" onClick={() => props.setLanguage('ru')}>
                         <LetterWrap word={russian} section={'hero'} />
                     </span>
