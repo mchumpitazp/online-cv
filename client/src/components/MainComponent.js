@@ -28,7 +28,7 @@ function Main () {
     const [cursorText, setCursorText] = React.useState('');
     const [cursorOffset, setCursorOffset] = React.useState(6);
     const [language, setLanguage] = React.useState('en');
-    const [renderIntro, setRenderIntro] = React.useState(false);
+    const [renderIntro, setRenderIntro] = React.useState(true);
     const [darkMode, setDarkMode] = React.useState(false);
 
     // Section References
