@@ -522,6 +522,60 @@ body {
     #portfolio-list .text-tag { width: 15vw !important; }
 }
 
+#background {
+    height: fit-content;
+    width: 90%;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+
+    #background-title {
+        font-size: 3rem;
+        font-family: 'Viaoda Libre', sans-serif;
+    }
+
+    .background-subtitle {
+        font-size: 2rem;
+        font-family: 'Viaoda Libre', sans-serif;
+        
+    }
+
+    #background__education {
+        //margin-top: 5%;
+        //margin-bottom: 5%;
+
+        #background__education-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5%;
+            font-weight: 300;
+    
+            .background__education-item {
+                width: 40%;
+                margin-top: 3%;
+            }
+        }
+    }
+    
+    #background__experience-items {
+        //display: flex;
+        //flex-direction: column;
+        //gap: 5%;
+        font-weight: 300;
+
+        .background__experience-item {
+            margin-top: 3%;
+        }
+    }
+    
+}
+
+@media (max-width: 576px) {
+    #background {
+        #background-title { font-size: 2.2rem; }
+        .background-subtitle { font-size: 1.7rem; }
+    }
+}
+
 footer {
     position: relative;
     height: fit-content;

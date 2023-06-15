@@ -11,6 +11,7 @@ import Hero from './HeroComponent';
 import About from './AboutComponent';
 import PortfolioSlider from './PortfolioSliderComponent';
 import PortfolioList from './PortfolioListComponent';
+import Background from './BackgroundComponent';
 import Footer from './FooterComponent';
 
 // Redux
@@ -28,7 +29,7 @@ function Main () {
     const [cursorText, setCursorText] = React.useState('');
     const [cursorOffset, setCursorOffset] = React.useState(6);
     const [language, setLanguage] = React.useState('en');
-    const [renderIntro, setRenderIntro] = React.useState(true);
+    const [renderIntro, setRenderIntro] = React.useState(false);
     const [darkMode, setDarkMode] = React.useState(false);
 
     // Section References
@@ -104,6 +105,7 @@ function Main () {
                         setCursorText={setCursorText}
                         setCursorOffset={setCursorOffset} />
                 }
+                <Background language={language} />
                 <Footer language={language}
                         setCursorVariant={setCursorVariant}
                         setCursorText={setCursorText}

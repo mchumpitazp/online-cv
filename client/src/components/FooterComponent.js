@@ -33,6 +33,10 @@ function Footer (props) {
 
     return (
         <footer className='d-flex flex-column align-items-center'>
+            <div id='footer-dot' onMouseEnter={textEnter} onMouseLeave={mouseLeave}>
+                <i className='fa fa-circle' style={{fontSize: '0.5rem'}}></i>
+            </div>
+
             <div id='footer-email' className='d-flex flex-column justify-content-center align-items-center'>
                 <a href="mailto:mauro@polino.ru" className='text-center' target="_blank" rel="noopener noreferrer">
                     <span id='footer-email__title' data-aos="fade"
