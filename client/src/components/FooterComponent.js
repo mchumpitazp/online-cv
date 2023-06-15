@@ -9,7 +9,7 @@ function Footer (props) {
     } else {
         title = "давайте работать?";
         subtitle = "Отправьте письмо по адресу";
-        toTop = 'на вершину';
+        toTop = 'наверх';
     }
 
     const backToTop = () => window.scrollTo(0, 0);

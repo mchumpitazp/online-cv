@@ -5,7 +5,7 @@ function Background (props) {
     if (props.language === 'en') {
         var titles = ['Background', 'Education', 'Experience'];
         var months = ['Dec', 'Present', 'Sep', 'Nov'];
-        var utec = 'Studied in Peru at University of Technology and Engineering. Graduated Electronics Engineer specialized in Digital and Computational Systems.';
+        var utec = 'Studied in Peru at University of Technology and Engineering. Graduated as Electronics Engineer specialized in Digital and Computational Systems.';
         var harvard = 'Certified by Harvard University in Web Programming with Python and JavaScript, including six projects.';
         var hkust = 'Certified by The Hong Kong University of Science and Technology in Full-Stack Web Development with React.';
         var ibm = 'Certified by IBM in Python for Data Science using Jupyter and Pandas library.';
