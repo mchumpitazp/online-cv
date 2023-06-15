@@ -540,9 +540,6 @@ body {
     }
 
     #background__education {
-        //margin-top: 5%;
-        //margin-bottom: 5%;
-
         #background__education-items {
             display: flex;
             flex-wrap: wrap;
@@ -557,9 +554,6 @@ body {
     }
     
     #background__experience-items {
-        //display: flex;
-        //flex-direction: column;
-        //gap: 5%;
         font-weight: 300;
 
         .background__experience-item {
@@ -567,6 +561,10 @@ body {
         }
     }
     
+    a { 
+        color: inherit;
+        i { font-size: 0.7rem; }
+    }
 }
 
 @media (max-width: 576px) {

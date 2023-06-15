@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from 'reactstrap';
+import { baseUrl } from "../shared/baseUrl";
 
 function Background (props) {
     if (props.language === 'en') {
@@ -22,6 +23,16 @@ function Background (props) {
         engineer = ['Инженер', 'Более 1 года сотрудничал с технической командой, разрабатывая инновационные и масштабируемые аппаратные и программные решения для средних и крупных проектов в Центре Водных Исследований и Технологий в Перу.'];
     }
 
+    const textEnter = () => {
+        props.setCursorVariant('text');
+        props.setCursorOffset(20);
+    }
+
+    const textLeave = () => {
+        props.setCursorVariant('default');
+        props.setCursorOffset(6);
+    }
+
     return (
         <section id="background" className="mx-auto">
             <span id="background-title" data-aos="fade">{titles[0]}</span>
@@ -35,23 +46,40 @@ function Background (props) {
                         <div id="background__education-items" className="d-flex flex-wrap gap-5">
                             <div className="background__education-item mt-5" data-aos="fade">
                                 <span><small>2015 &mdash; 2021</small></span>
+                                <a href={baseUrl + '/files/bachelor.pdf'} target="_blank" rel="noopener noreferrer"
+                                    onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                                    <i className="fa fa-file-o ps-2"></i>
+                                </a>
                                 <br/>
                                 <span>{utec}</span>
                             </div>
                             <div className="background__education-item mt-5" data-aos="fade">
                                 <span><small>2022</small></span>
+                                <a href="https://certificates.cs50.io/33d96b3c-d62b-4a87-a4cd-7806928a2c55.pdf?size=letter" target="_blank" rel="noopener noreferrer"
+                                    onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                                    <i className="fa fa-file-o ps-2"></i>
+                                </a>
                                 <br/>
-                                <span>{harvard}</span>
+                                <span>{harvard}</span>                                
                             </div>
                             <div className="background__education-item" data-aos="fade">
                                 <span><small>2022</small></span>
+                                <a href="https://www.coursera.org/account/accomplishments/specialization/DP54KCJ5LSCB" target="_blank" rel="noopener noreferrer"
+                                    onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                                    <i className="fa fa-file-o ps-2"></i>
+                                </a>
                                 <br/>
-                                <span>{hkust}</span>
+                                <span>{hkust}</span>                                
                             </div>
                             <div className="background__education-item" data-aos="fade">
                                 <span><small>2019</small></span>
+                                <a href="https://www.credly.com/badges/6661a80c-878c-45af-8a41-bbb50f94a837" target="_blank" rel="noopener noreferrer"
+                                    onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                                    <i className="fa fa-file-o ps-2"></i>
+                                </a>
                                 <br/>
                                 <span>{ibm}</span>
+                                
                             </div>
                         </div>
                     </div>
@@ -66,6 +94,10 @@ function Background (props) {
                             </div>
                             <div className="background__experience-item mt-5" data-aos="fade">
                                 <span><small>{months[2]} 2020 &mdash; {months[3]} 2021</small></span>
+                                <a href={baseUrl + '/files/cita-letter.pdf'} target="_blank" rel="noopener noreferrer"
+                                    onMouseEnter={textEnter} onMouseLeave={textLeave}>
+                                    <i className="fa fa-file-o ps-2"></i>
+                                </a>
                                 <br/>
                                 <span>R&D {engineer[0]} &mdash; {engineer[1]}</span>
                             </div>

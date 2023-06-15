@@ -105,7 +105,9 @@ function Main () {
                         setCursorText={setCursorText}
                         setCursorOffset={setCursorOffset} />
                 }
-                <Background language={language} />
+                <Background language={language}
+                            setCursorVariant={setCursorVariant}
+                            setCursorOffset={setCursorOffset} />
                 <Footer language={language}
                         setCursorVariant={setCursorVariant}
                         setCursorText={setCursorText}
