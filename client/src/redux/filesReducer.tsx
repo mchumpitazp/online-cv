@@ -4,7 +4,7 @@ export const filesReducer = (state = {
         isLoading: true,
         errMess: null,
         files: []
-    }, action) => {
+    }, action: { type: string; payload: any; }) => {
         
     switch(action.type) {
         case ActionTypes.ADD_FILES:
