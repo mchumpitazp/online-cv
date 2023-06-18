@@ -1,7 +1,14 @@
 import React from "react";
 import LetterWrap from "./LetterWrapComponent";
 
-function About (props) {
+interface AboutProps {
+    language : string,
+    setLanguage: (language: string) => void,
+    setCursorVariant: (variant: string) => void,
+    setCursorOffset: (offset: number) => void
+}
+
+function About (props: AboutProps) {
     if (props.language === 'en') {
         var title = "about me";
         var about = ["I'm Mauro Polino.", "A freelance web developer, oriented to scalability and performance."];
@@ -17,8 +24,8 @@ function About (props) {
     }
 
     React.useEffect(() => {
-        const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
-        if (isTouchDevice()) document.getElementById('about').classList.add('touch-screen');
+        const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+        if (isTouchDevice()) document.getElementById('about')!.classList.add('touch-screen');
     }, []);
 
     // Cursor Animation

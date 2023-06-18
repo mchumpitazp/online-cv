@@ -3,21 +3,31 @@ import { baseUrl } from '../shared/baseUrl';
 import $ from 'jquery';
 import Expander from "./ExpanderComponent";
 
-function Portfolio (props) {
+interface PortfolioListProps {
+    projects: any,
+    darkMode: boolean,
+    setLanguage: (language: string) => void,
+    setCursorVariant: (variant: string) => void,
+    setCursorText: (text: string) => void,
+    setCursorOffset: (offset: number) => void
+}
+
+function PortfolioList (props: PortfolioListProps) {
 
     // Get projects
     const projectsSorted = [...props.projects.projects];
 
     projectsSorted.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
+        return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
     });
 
     // Get logo image
-    const getLogoImage = (image) => (image.slice(0, -4) + (props.darkMode ? '-black' : '-white') + "-logo.png");
-    const getTabletImage = (image) => (image.slice(0, -4) + "-tablet.jpg");
+    const getLogoImage = (image: string) => (image.slice(0, -4) + (props.darkMode ? '-black' : '-white') + "-logo.png");
+    const getTabletImage = (image: string) => (image.slice(0, -4) + "-tablet.jpg");
 
-    const handleToggler = (e) => {
-        const item = e.target.parentNode;
+    const handleToggler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const target = e.target as Element;
+        const item = target.parentNode as Element;
         if (item.classList.contains('expanded')) {
             //item.classList.remove('expanded');
             $(item).find('.expander').trigger('click', {isExpanded: true, parent: item});
@@ -73,4 +83,4 @@ function Portfolio (props) {
     );
 }
 
-export default Portfolio;
+export default PortfolioList;

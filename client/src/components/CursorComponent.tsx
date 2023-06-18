@@ -1,12 +1,19 @@
 import React from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, Variants } from "framer-motion";
 
-function Cursor (props) {
+interface CursorProps {
+    cursorVariant: string,
+    cursorText: string,
+    cursorOffset: number,
+    darkMode: boolean
+}
+
+function Cursor (props: CursorProps) {
     const cursorX = useMotionValue(window.innerWidth / 2 - 6);
     const cursorY = useMotionValue(window.innerHeight / 2 - 6);
 
     React.useEffect(() => {
-        const mouseMove = e => {
+        const mouseMove = (e: MouseEvent) => {
             cursorX.set(e.clientX - props.cursorOffset);
             cursorY.set(e.clientY - props.cursorOffset);
         }
@@ -15,7 +22,7 @@ function Cursor (props) {
         return () => window.removeEventListener('mousemove', mouseMove);
     }, [props.cursorOffset, cursorX, cursorY]);
 
-    let variants = {
+    const variants: Variants = {
         default: {
             backgroundColor: props.darkMode ? '#1a1a1a' : '#f4f4f4'
             //x: mousePosition.x - 6,

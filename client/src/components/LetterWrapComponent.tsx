@@ -1,10 +1,13 @@
-import React from 'react';
+type Props = {
+    word: string,
+    section: string
+}
 
-function LetterWrap ({ word, section }) {
+function LetterWrap ({ word, section }: Props) {
     let wordArray = word.split("");
     let delay = -20;
 
-    const characters = wordArray.map((char, index) => {
+    const characters = wordArray.map((char: string, index: number) => {
         const uniqueKey = `${section}-${word}-${index}`;
         if (char === ' ') return (<div key={uniqueKey}>&nbsp;</div>);
 

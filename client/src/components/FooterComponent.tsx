@@ -1,7 +1,14 @@
 import React from 'react';
 import LetterWrap from './LetterWrapComponent';
 
-function Footer (props) {
+interface FooterProps {
+    language: string,
+    setCursorVariant: (variant: string) => void,
+    setCursorText: (text: string) => void,
+    setCursorOffset: (offset: number) => void
+}
+
+function Footer (props: FooterProps) {
     if (props.language === 'en') {
         var title = "let's work together?";
         var subtitle = "Send an email to";
@@ -15,7 +22,7 @@ function Footer (props) {
     const backToTop = () => window.scrollTo(0, 0);
 
     const emailEnter = () => {
-        document.getElementById('cursorText').classList.add('email');
+        document.getElementById('cursorText')!.classList.add('email');
         props.setCursorVariant('email');
         props.setCursorText('👋🏼');
         props.setCursorOffset(30);
@@ -25,7 +32,7 @@ function Footer (props) {
         props.setCursorOffset(20);
     }
     const mouseLeave = () => {
-        document.getElementById('cursorText').classList.remove('email'); // if was email
+        document.getElementById('cursorText')!.classList.remove('email'); // if was email
         props.setCursorVariant('default');
         props.setCursorText('');
         props.setCursorOffset(6);

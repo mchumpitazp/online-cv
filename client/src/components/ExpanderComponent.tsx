@@ -2,12 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import $ from 'jquery';
 
-function Expander ({ toAll }) {
+function Expander () {
     const [rotation, setRotation] = React.useState(false);
-    const myRef = React.useRef();
+    const myRef = React.useRef(null);
 
     React.useEffect(() => {
-        $(myRef.current).on('click', function (e, {isExpanded, parent}) {
+        $(myRef.current!).on('click', function (e, {isExpanded, parent}) {
             if (isExpanded) {
                 setRotation(!rotation);
                 $(parent).removeClass('expanded');

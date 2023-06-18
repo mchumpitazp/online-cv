@@ -1,16 +1,21 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
 import LetterWrap from './LetterWrapComponent';
 import $ from 'jquery';
 
-function Header (props) {
+interface HeaderProps {
+    language: string,
+    setCursorVariant: (variant: string) => void,
+    setCursorOffset: (offset: number) => void,
+}
+
+function Header (props: HeaderProps) {
     const wordsEn = ['mauro', 'work', 'contact', 'available', 'for work'];
     const wordsRu = ['мауро', 'проекты', 'контакт', 'доступен', 'для работы'];
     const words = props.language === 'en' ? wordsEn : wordsRu;
 
     React.useEffect(() => {
-        const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+        const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
         if (isTouchDevice()) $('.navbar').addClass('touch-screen');
         
         const introAnimation = () => {
@@ -57,11 +62,9 @@ function Header (props) {
                             <LetterWrap word={words[1]} section={'header'}/>
                         </a>
                     </NavItem>
-                    <NavItem>
-                        <NavLink className="nav-link text-nav" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                    <NavItem className="nav-link text-nav" onClick={() => window.scrollTo(0, document.body.scrollHeight)}
                             onMouseEnter={textEnter} onMouseLeave={textLeave} >
                             <LetterWrap word={words[2]} section={'header'}/>
-                        </NavLink>
                     </NavItem>
                 </Nav>    
                 <div className='available'>

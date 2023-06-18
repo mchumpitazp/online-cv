@@ -3,9 +3,7 @@ import Main from './components/MainComponent';
 import Admin from './adminComponents/AdminComponent';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConfigureStore } from './redux/configureStore';
-
-const store = ConfigureStore();
+import { store } from './redux/store';
 
 function App() {
     return (

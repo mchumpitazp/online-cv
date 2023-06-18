@@ -8,12 +8,10 @@ const reducer = {
     files: filesReducer
 }
 
-export const ConfigureStore = () => {
+export const store = configureStore({
+    reducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware() //.concat(logger)
+});
 
-    const store = configureStore({
-        reducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware() //.concat(logger)
-    });
-
-    return store;
-}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

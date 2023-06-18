@@ -2,7 +2,13 @@ import React from "react";
 import { Row, Col } from 'reactstrap';
 import { baseUrl } from "../shared/baseUrl";
 
-function Background (props) {
+interface BackgroundProps {
+    language: string,
+    setCursorVariant: (variant: string) => void,
+    setCursorOffset: (offset: number) => void
+}
+
+function Background (props: BackgroundProps) {
     if (props.language === 'en') {
         var titles = ['Background', 'Education', 'Experience'];
         var months = ['Dec', 'Present', 'Sep', 'Nov'];

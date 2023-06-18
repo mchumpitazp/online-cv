@@ -15,13 +15,14 @@ import Background from './BackgroundComponent';
 import Footer from './FooterComponent';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProjects, fetchFiles } from '../redux/ActionCreators';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { fetchProjects } from '../redux/ActionCreators';
+// import { fetchProjects, fetchFiles } from '../redux/ActionCreators';
 
 function Main () {
     // Redux
-    const dispatch = useDispatch();
-    const projects = useSelector(state => state.projects);
+    const dispatch = useAppDispatch();
+    const projects = useAppSelector(state => state.projects);
     //const files = useSelector(state => state.files);
 
     // States
@@ -32,12 +33,8 @@ function Main () {
     const [renderIntro, setRenderIntro] = React.useState(true);
     const [darkMode, setDarkMode] = React.useState(false);
 
-    // Section References
-    const skillsRef = React.useRef();
-    const experienceRef = React.useRef();
-    const recordsRef = React.useRef();
-
-    const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    // Cursor dependency
+    const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 
     React.useEffect(() => {
         dispatch(fetchProjects());
@@ -77,10 +74,7 @@ function Main () {
                             cursorOffset={cursorOffset}
                             darkMode={darkMode} />
                 }
-                <Header skillsRef={skillsRef}
-                        experienceRef={experienceRef}
-                        recordsRef={recordsRef}
-                        language={language}
+                <Header language={language}
                         setCursorVariant={setCursorVariant}
                         setCursorOffset={setCursorOffset} />
                 <Hero language={language} setLanguage={setLanguage}

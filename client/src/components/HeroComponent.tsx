@@ -2,7 +2,16 @@ import React from "react";
 import LetterWrap from "./LetterWrapComponent";
 import $ from 'jquery';
 
-function Hero (props) {
+interface HeroProps {
+    language: string,
+    darkMode: boolean
+    setLanguage: (language: string) => void,
+    setCursorVariant: (variant: string) => void,
+    setCursorOffset: (offset: number) => void,
+    setDarkMode: (dark: boolean) => void
+}
+
+function Hero (props: HeroProps) {
     if (props.language === 'en') {
         var english = 'en';
         var russian = 'ru';
@@ -14,13 +23,14 @@ function Hero (props) {
     }
 
     React.useEffect(() => {
-        const width1 = document.getElementById('hero-shadow').offsetWidth;
-        const width2 = document.getElementById('hero__portrait').offsetWidth;
-        document.getElementById('hero-shadow').style.width = (width1 - width2) / 2 + 'px';
-        document.getElementById('hero-shadow').style.backgroundColor = '#1a1a1a';
-        setTimeout( () => document.getElementById('hero__portrait-shadow').style.width = '0px', 600);
-        document.getElementById('hero-shadow').style.width = '0px';
-        document.getElementById('hero__portrait-img').style.transform = 'scale(1)';
+        const heroShadow = document.getElementById('hero-shadow')!;
+        const width1 = heroShadow.offsetWidth;
+        const width2 = document.getElementById('hero__portrait')!.offsetWidth;
+        heroShadow.style.width = (width1 - width2) / 2 + 'px';
+        heroShadow.style.backgroundColor = '#1a1a1a';
+        setTimeout( () => document.getElementById('hero__portrait-shadow')!.style.width = '0px', 600);
+        heroShadow.style.width = '0px';
+        document.getElementById('hero__portrait-img')!.style.transform = 'scale(1)';
     }, []);
 
     const textEnter = () => {

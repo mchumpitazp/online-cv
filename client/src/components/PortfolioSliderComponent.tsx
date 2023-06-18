@@ -1,25 +1,33 @@
 import React from "react";
 import { baseUrl } from '../shared/baseUrl';
 
-function PortfolioSlider (props) {
+interface PortfolioSliderProps {
+    projects: any,
+    setLanguage: (language: string) => void,
+    setCursorVariant: (variant: string) => void,
+    setCursorText: (text: string) => void,
+    setCursorOffset: (offset: number) => void
+}
+
+function PortfolioSlider (props: PortfolioSliderProps) {
     const NUM_PROJECTS = 4;
-    const portfolioRef = React.useRef(null);
-    const trackRef = React.useRef(null);
-    const listRef = React.useRef(null);
+    const portfolioRef = React.useRef<HTMLElement>(null);
+    const trackRef = React.useRef<HTMLDivElement>(null);
+    const listRef = React.useRef<HTMLDivElement>(null);
 
     // Scrolling stuff
     React.useEffect(() => {
-        trackRef.current.style.height = (NUM_PROJECTS * 100) + "vw";
+        trackRef.current!.style.height = (NUM_PROJECTS * 100) + "vw";
 
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            const scrollTop = portfolioRef.current.offsetTop;
+            const scrollTop = portfolioRef.current!.offsetTop;
             const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             const offset = (scrollY - scrollTop) * 0.8;
             const scrollX = (vw * 0.93) * (NUM_PROJECTS - 1);
 
             if (scrollY >= scrollTop && offset < scrollX) {
-                listRef.current.style.transform = `translate3d(-${offset}px, 0px, 0px)`
+                listRef.current!.style.transform = `translate3d(-${offset}px, 0px, 0px)`
             }
         }
 
@@ -43,7 +51,7 @@ function PortfolioSlider (props) {
     const projectsSorted = [...props.projects.projects];
 
     projectsSorted.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
+        return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
     });
 
     // Get mobile image

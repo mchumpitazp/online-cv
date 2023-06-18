@@ -1,7 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
 
-function Intro (props) {
+interface IntroProps {
+    unmount: () => void;
+}
+
+function Intro (props: IntroProps) {
 
     React.useEffect(() => {
         setTimeout(() => {
