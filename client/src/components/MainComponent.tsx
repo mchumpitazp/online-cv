@@ -22,7 +22,7 @@ import { fetchProjects } from '../redux/ActionCreators';
 function Main () {
     // Redux
     const dispatch = useAppDispatch();
-    const projects = useAppSelector(state => state.projects);
+    const projects = useAppSelector((state: { projects: any; }) => state.projects);
     //const files = useSelector(state => state.files);
 
     // States
@@ -66,7 +66,7 @@ function Main () {
         )
     } else {
         return (
-            <React.Fragment>
+            <>
                 {   
                     !isTouchDevice() && 
                     <Cursor cursorVariant={cursorVariant}
@@ -106,7 +106,7 @@ function Main () {
                         setCursorVariant={setCursorVariant}
                         setCursorText={setCursorText}
                         setCursorOffset={setCursorOffset} />
-            </React.Fragment>
+            </>
         )
     }
 }

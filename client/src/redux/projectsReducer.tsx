@@ -4,7 +4,7 @@ export const projectsReducer = (state = {
         isLoading: true,
         errMess: null,
         projects: []
-    }, action: { type: string; payload: any; }) => {
+    }, action: any) => {
         
     switch(action.type) {
         case ActionTypes.ADD_PROJECTS:
