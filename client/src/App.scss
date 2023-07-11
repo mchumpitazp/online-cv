@@ -11,9 +11,8 @@ body {
 
 // Custom Cursor
 
-* {
-    cursor: none;
-}
+* { cursor: none; }
+#admin, #admin * { cursor: pointer; }
 
 #cursor {
     height: 12px;
@@ -612,5 +611,24 @@ footer {
     footer > #footer-email {
         #footer-email__title { font-size: 3rem; }
         #footer-email__subtitle { font-size: 1.7rem; }
+    }
+}
+
+#admin {
+    height: 100vh;
+
+    .nav {
+        .nav-link {
+            color: inherit;
+            text-transform: capitalize;
+        }
+        .nav-link.active { color: black; }
+    }
+
+    table {
+        .hidden {
+            display: none;
+            visibility: hidden;
+        }
     }
 }
