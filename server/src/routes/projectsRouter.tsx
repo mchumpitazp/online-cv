@@ -18,5 +18,18 @@ projectRouter.route('/')
     .catch((err: any) => next(err));
 })
 
+projectRouter.route('/:projectId')
+.put((req: Request, res: Response, next: NextFunction) => {
+    Projects.findByIdAndUpdate(req.params.projectId, {
+        $set: req.body
+    }, { new: true })
+    .then((project: any) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(project);
+    }, (err: any) => next(err))
+    .catch((err: any) => next(err));
+})
+
 module.exports = projectRouter;
 export {};

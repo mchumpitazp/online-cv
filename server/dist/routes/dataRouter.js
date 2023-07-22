@@ -12,9 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const path = require('path');
-const mongoose = require('mongoose');
-const Projects = require('../models/projects');
 const dataRouter = express.Router();
 dataRouter.use(bodyParser.json());
 dataRouter.route('/')
@@ -26,41 +23,10 @@ dataRouter.route('/')
         const model = require(modelsPath + '/' + file);
         const arr = yield model.find();
         const key = file.replace('.js', '');
-        // let obj: {[key: string]: any} = {};
-        // obj[key] = arr;
-        // database.push(obj);
         database[key] = arr;
     }
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(database);
-    // async function getData() {
-    //     let database: any[] = [];
-    //     const modelsFiles = await fs.promises.readdir(modelsPath);
-    //     await modelsFiles.forEach(async (file: string) => {
-    //         const model = require(modelsPath + '/' + file);
-    //         const arr = await model.find({});
-    //         const key = file.replace('.js', '');
-    //         let obj: {[key: string]: any} = {};
-    //         obj[key] = arr;
-    //         database.push(obj);
-    //     });
-    //     return database;
-    // }
-    // async function sendResponse() {
-    //     const database = await getData();
-    //     console.log(database);
-    //     res.statusCode = 200;
-    //     res.setHeader('Content-Type', 'application/json');
-    //     res.json(database);
-    // }
-    // sendResponse();
-    // Projects.find(req.query)
-    // .then((projects: any) => {
-    //     res.statusCode = 200;
-    //     res.setHeader('Content-Type', 'application/json');
-    //     res.json(projects);
-    // }, (err: any) => next(err))
-    // .catch((err: any) => next(err));
 }));
 module.exports = dataRouter;

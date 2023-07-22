@@ -12,7 +12,7 @@ body {
 // Custom Cursor
 
 * { cursor: none; }
-#admin, #admin * { cursor: pointer; }
+.admin, .admin * { cursor: auto; }
 
 #cursor {
     height: 12px;
@@ -614,21 +614,35 @@ footer {
     }
 }
 
-#admin {
+.admin {
     height: 100vh;
 
-    .nav {
-        .nav-link {
-            color: inherit;
-            text-transform: capitalize;
-        }
-        .nav-link.active { color: black; }
+    .admin-title {
+        padding-top: 5vh;
+        padding-bottom: 3vh;
     }
 
-    table {
-        .hidden {
-            display: none;
-            visibility: hidden;
+    .btn * { cursor: pointer; }
+
+    #panel {
+        .nav {
+            .nav-link {
+                color: inherit;
+                text-transform: capitalize;
+            }
+            .nav-link.active { color: black; }
+        }
+    
+        table {
+            .hidden {
+                display: none;
+                visibility: hidden;
+            }
         }
     }
+
+    #item {
+       #item-title { text-transform: capitalize; } 
+    }
+    
 }

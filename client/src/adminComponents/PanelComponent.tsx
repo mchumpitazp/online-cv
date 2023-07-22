@@ -1,35 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Table, Nav, NavLink, TabContent, TabPane, Button} from "reactstrap";
 
 interface PanelProps {
-    data: any,
-    currentTab: string,
-    nameTab: string,
-    setCurrentTab: (curr: string) => void,
-    setNameTab: (name: string) => void
+    data: any
 }
 
 function Panel (props: PanelProps) {
+    const [currentTab, setCurrentTab] = React.useState('0');
+    const [nameTab, setNameTab] = React.useState('');
+
     React.useEffect(() => {
         const key: string = Object.keys(props.data)[0];
-        props.setNameTab(key?.slice(0, -1));
-    }, [props]);
+        setNameTab(key);
+    }, [setNameTab, props]);
 
     const keys = Object.keys(props.data);
     const values = Object.values(props.data);
 
     // Toggle states
     const toggleTab = (strIndex: string, name: string) => {
-        props.setCurrentTab(strIndex);
-        props.setNameTab(name);
+        setCurrentTab(strIndex);
+        setNameTab(name);
     }
 
     const renderNav = keys.map((key: string, index: number) => {
         const strIndex = index.toString();
         return (
             <NavLink key={key}
-                className = { props.currentTab === strIndex ? 'active' : '' }
-                onClick={() => toggleTab(strIndex, key.slice(0, -1))}>
+                className = { currentTab === strIndex ? 'active' : '' }
+                onClick={() => toggleTab(strIndex, key)}>
                 {key}
             </NavLink>
         )
@@ -54,15 +54,18 @@ function Panel (props: PanelProps) {
 
             const values = Object.values(newObj);
             const rowData = values.map((value: any, i: number) => ( <td key={i}>{value}</td>));
-
             rowData.push(
                 <td key={rowData.length}>
-                    <Button color='primary'>
-                        Edit
-                    </Button>
+                    <Link  to={'/admin/' + nameTab}
+                            state={{item_id: itemObj._id}} relative='path'>
+                        <Button color='primary'>
+                            <i className='fa fa-pencil'></i>
+                        </Button>
+                    </Link>
+                    &nbsp;
                     &nbsp;
                     <Button color='danger'>
-                        Delete
+                        <i className='fa fa-trash'></i>
                     </Button>
                 </td>
             )
@@ -102,10 +105,10 @@ function Panel (props: PanelProps) {
     });
 
     return (
-        <div id="admin">
-            <Container>
+        <div className="admin">
+            <Container id='panel'>
 
-                <h2>Admin Panel</h2>
+                <h2 className='admin-title'>Admin Panel</h2>
 
                 <Nav tabs>
                     {renderNav}
@@ -113,11 +116,11 @@ function Panel (props: PanelProps) {
 
                 <div className="d-flex justify-content-end">
                     <Button className="my-3" color='success'>
-                        + New {props.nameTab}
+                        + New {nameTab?.slice(0, -1)}
                     </Button>
                 </div>
                 
-                <TabContent activeTab={props.currentTab}>
+                <TabContent activeTab={currentTab}>
                     {renderTabContent}
                 </TabContent>
 
