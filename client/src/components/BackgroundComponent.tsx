@@ -54,7 +54,7 @@ function Background (props: BackgroundProps) {
                                 <span><small>2015 &mdash; 2021</small></span>
                                 <a href={baseUrl + '/files/bachelor.pdf'} target="_blank" rel="noopener noreferrer"
                                     onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                                    <i className="fa fa-file-o ps-2"></i>
+                                    <i className="fa fa-link ps-2"></i>
                                 </a>
                                 <br/>
                                 <span>{utec}</span>
@@ -63,7 +63,7 @@ function Background (props: BackgroundProps) {
                                 <span><small>2022</small></span>
                                 <a href="https://certificates.cs50.io/33d96b3c-d62b-4a87-a4cd-7806928a2c55.pdf?size=letter" target="_blank" rel="noopener noreferrer"
                                     onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                                    <i className="fa fa-file-o ps-2"></i>
+                                    <i className="fa fa-link ps-2"></i>
                                 </a>
                                 <br/>
                                 <span>{harvard}</span>                                
@@ -72,7 +72,7 @@ function Background (props: BackgroundProps) {
                                 <span><small>2022</small></span>
                                 <a href="https://www.coursera.org/account/accomplishments/specialization/DP54KCJ5LSCB" target="_blank" rel="noopener noreferrer"
                                     onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                                    <i className="fa fa-file-o ps-2"></i>
+                                    <i className="fa fa-link ps-2"></i>
                                 </a>
                                 <br/>
                                 <span>{hkust}</span>                                
@@ -81,7 +81,7 @@ function Background (props: BackgroundProps) {
                                 <span><small>2019</small></span>
                                 <a href="https://www.credly.com/badges/6661a80c-878c-45af-8a41-bbb50f94a837" target="_blank" rel="noopener noreferrer"
                                     onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                                    <i className="fa fa-file-o ps-2"></i>
+                                    <i className="fa fa-link ps-2"></i>
                                 </a>
                                 <br/>
                                 <span>{ibm}</span>
@@ -102,7 +102,7 @@ function Background (props: BackgroundProps) {
                                 <span><small>{months[2]} 2020 &mdash; {months[3]} 2021</small></span>
                                 <a href={baseUrl + '/files/cita-letter.pdf'} target="_blank" rel="noopener noreferrer"
                                     onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                                    <i className="fa fa-file-o ps-2"></i>
+                                    <i className="fa fa-link ps-2"></i>
                                 </a>
                                 <br/>
                                 <span>R&D {engineer[0]} &mdash; {engineer[1]}</span>

@@ -14,8 +14,17 @@ projectRouter.route('/')
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(projects);
-    }, (err: any) => next(err))
-    .catch((err: any) => next(err));
+    }, (err: Error) => next(err))
+    .catch((err: Error) => next(err));
+})
+.post((req: Request, res: Response, next: NextFunction) => {
+    Projects.create(req.body)
+    .then((project: any) => {
+        res.statusCode = 201;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(project);
+    }, (err: Error) => next(err))
+    .catch((err: Error) => next(err));
 })
 
 projectRouter.route('/:projectId')
@@ -24,11 +33,11 @@ projectRouter.route('/:projectId')
         $set: req.body
     }, { new: true })
     .then((project: any) => {
-        res.statusCode = 200;
+        res.statusCode = 201;
         res.setHeader('Content-Type', 'application/json');
         res.json(project);
-    }, (err: any) => next(err))
-    .catch((err: any) => next(err));
+    }, (err: Error) => next(err))
+    .catch((err: Error) => next(err));
 })
 
 module.exports = projectRouter;

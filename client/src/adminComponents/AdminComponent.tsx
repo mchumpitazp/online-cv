@@ -7,7 +7,8 @@ import { fetchData } from '../redux/ActionCreators';
 
 // Components
 import Panel from "./PanelComponent";
-import Item from './ItemComponent';
+import EditItem from './ItemEditComponent';
+import NewItem from './ItemNewComponent';
 
 function Admin () {
     // Redux
@@ -26,8 +27,9 @@ function Admin () {
         return (
             <Routes>
                 <Route path="*" element={<Navigate to="/admin" replace />} />
-                <Route path="/" element={<Panel data={data.data}/>} />
-                <Route path="/:item_title" element={<Item data={data}/>} />
+                <Route path="/" element={<Panel data={data.data} />} />
+                <Route path="/:item_title/edit" element={<EditItem data={data} />} />
+                <Route path="/:item_title/new" element={<NewItem data={data} />} />
             </Routes>
         ) 
     }

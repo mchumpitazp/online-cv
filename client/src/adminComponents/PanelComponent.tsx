@@ -56,7 +56,7 @@ function Panel (props: PanelProps) {
             const rowData = values.map((value: any, i: number) => ( <td key={i}>{value}</td>));
             rowData.push(
                 <td key={rowData.length}>
-                    <Link  to={'/admin/' + nameTab}
+                    <Link  to={nameTab + '/edit'}
                             state={{item_id: itemObj._id}} relative='path'>
                         <Button color='primary'>
                             <i className='fa fa-pencil'></i>
@@ -115,9 +115,11 @@ function Panel (props: PanelProps) {
                 </Nav>
 
                 <div className="d-flex justify-content-end">
-                    <Button className="my-3" color='success'>
-                        + New {nameTab?.slice(0, -1)}
-                    </Button>
+                    <Link to={nameTab + '/new'}>
+                        <Button className="my-3" color='success'>
+                            + New {nameTab?.slice(0, -1)}
+                        </Button>
+                    </Link>
                 </div>
                 
                 <TabContent activeTab={currentTab}>
