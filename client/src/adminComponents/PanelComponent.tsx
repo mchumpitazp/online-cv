@@ -8,46 +8,26 @@ interface PanelProps {
 }
 
 function Panel (props: PanelProps) {
-    const [currentTab, setCurrentTab] = React.useState('0');
-    const [nameTab, setNameTab] = React.useState('');
-    const [modal, setModal] = React.useState(true);
+    const [activeTab, setActiveTab] = React.useState('');
+    const [modal, setModal] = React.useState(false);
     const [itemId, setItemId] = React.useState('');
 
     React.useEffect(() => {
         const key: string = Object.keys(props.data)[0];
-        setNameTab(key);
-    }, [setNameTab, props]);
+        setActiveTab(key);
+    }, [setActiveTab, props]);
 
-    React.useEffect(() => {
-        setModal(modal => !modal);
-    }, [itemId]);
+    const toggleModal = (itemId: string) => {
+        setItemId(itemId);
+        setModal(!modal);
+    }
 
     const keys = Object.keys(props.data);
     const values = Object.values(props.data);
 
-    // Toggle states
-    const toggleTab = (strIndex: string, name: string) => {
-        setCurrentTab(strIndex);
-        setNameTab(name);
-    }
-
-    const renderNav = keys.map((key: string, index: number) => {
-        const strIndex = index.toString();
-        return (
-            <NavLink key={key}
-                className = { currentTab === strIndex ? 'active' : '' }
-                onClick={() => toggleTab(strIndex, key)}>
-                {key}
-            </NavLink>
-        )
-    });
-
     const renderTable = (arrObj: any) => {
-        let headers = Object.keys(arrObj[0]);
-        let i = headers.indexOf('_id');
-        headers.splice(i, 1);
-        i = headers.indexOf('__v');
-        headers.splice(i, 1);
+        let headers = Object.keys(arrObj[0])
+                            .filter(key => key !== '_id' && key !== '__v');
         headers.push('actions');
 
         const tableHeaders = headers.map((header: string, i: number) => {
@@ -63,7 +43,7 @@ function Panel (props: PanelProps) {
             const rowData = values.map((value: any, i: number) => ( <td key={i}>{value}</td>));
             rowData.push(
                 <td key={rowData.length}>
-                    <Link  to={nameTab + '/edit'}
+                    <Link  to={activeTab + '/edit'}
                             state={{item_id: itemObj._id}} relative='path'>
                         <Button color='primary'>
                             <i className='fa fa-pencil'></i>
@@ -71,13 +51,13 @@ function Panel (props: PanelProps) {
                     </Link>
                     &nbsp;
                     &nbsp;
-                    <Button color='danger' onClick={() => setItemId(itemObj._id)}>
+                    <Button color='danger' onClick={() => toggleModal(itemObj._id)}>
                         <i className='fa fa-trash'></i>
                     </Button>
                 </td>
             )
 
-            return ( <tr id={itemObj['_id']} key={itemObj['_id']}>{rowData}</tr> );
+            return ( <tr key={itemObj['_id']}>{rowData}</tr> );
         })
 
         return (
@@ -95,26 +75,25 @@ function Panel (props: PanelProps) {
     };
 
     const renderTabContent = values.map((arrObj: any, i: number) => {
-        const strIndex = i.toString();    
-        if (arrObj.length === 0) {
-            return (
-                <TabPane tabId={strIndex} key={i}>
-                    <span>Empty table.</span>
-                </TabPane>
-            );
-        }
-        
         return (
-            <TabPane tabId={strIndex} key={i}>
+            <TabPane tabId={keys[i]} key={i}>
                 {renderTable(arrObj)}
             </TabPane>
         );
     });
 
+    const renderNav = keys.map((key: string, i: number) => {
+        return (
+            <NavLink key={i} onClick={() => setActiveTab(key)}
+                     className = { activeTab === key ? 'active' : '' } >
+                {key}
+            </NavLink>
+        )
+    });
+
     return (
         <div className="admin">
             <Container id='panel'>
-
                 <h2 className='admin-title'>Admin Panel</h2>
 
                 <Nav tabs>
@@ -122,23 +101,21 @@ function Panel (props: PanelProps) {
                 </Nav>
 
                 <div className="d-flex justify-content-end">
-                    <Link to={nameTab + '/new'}>
+                    <Link to={activeTab + '/new'}>
                         <Button className="my-3" color='success'>
-                            + New {nameTab?.slice(0, -1)}
+                            + New {activeTab?.slice(0, -1)}
                         </Button>
                     </Link>
                 </div>
                 
-                <TabContent activeTab={currentTab}>
+                <TabContent activeTab={activeTab}>
                     {renderTabContent}
                 </TabContent>
 
-                <ItemDeleteModal    itemTitle={nameTab}
+                <ItemDeleteModal    itemTitle={activeTab}
                                     itemId={itemId} 
                                     isOpen={modal} 
                                     setModal={setModal}/>
-
-
             </Container>
         </div>
         

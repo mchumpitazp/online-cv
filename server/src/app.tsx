@@ -31,24 +31,4 @@ app.use(cors());
 app.use('/api/projects', projectRouter);
 app.use('/api/data', dataRouter);
 
-
-
-// CRUD DEV
-
-// // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.use(expressLayout);
-// app.set('layout', './layout');
-// app.set('view engine', 'ejs');
-
-// // home 
-// app.get('/', (req: any, res: any) => {
-//     res.render('index');
-    
-//     const locals = {
-//         title: 'Admin',
-//         description: 'CRUD NODEJS'
-//     }
-// })
-
 export {};
