@@ -39,6 +39,15 @@ projectRouter.route('/:projectId')
     }, (err: Error) => next(err))
     .catch((err: Error) => next(err));
 })
+.delete((req: Request, res: Response, next: NextFunction) => {
+    Projects.findByIdAndRemove(req.params.projectId)
+    .then((project: any) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(project);
+    }, (err: Error) => next(err))
+    .catch((err: Error) => next(err));
+});
 
 module.exports = projectRouter;
 export {};

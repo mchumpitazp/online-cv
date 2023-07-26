@@ -23,7 +23,6 @@ function ItemNew (props: ItemNewProps) {
 
     const submitForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('submitted new');
         const formData: FormData = new FormData(e.currentTarget);
         let newData: { [key: string]: any } = {};
         formData.forEach((value, key) => newData[key] = value );

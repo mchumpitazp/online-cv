@@ -55,9 +55,9 @@ function Footer (props: FooterProps) {
                 <span id='footer-email__subtitle' className='text-center' data-aos="fade">
                     <span className='d-inline-block'>{subtitle}</span>
                     &nbsp;
-                    <a id='footer-email__email' href="mailto:mchumpitazp@gmail.com" target="_blank" rel="noopener noreferrer">
+                    <a id='footer-email__email' href="mailto:mauro@polino.ru" target="_blank" rel="noopener noreferrer">
                         <u className='py-3' onMouseEnter={emailEnter} onMouseLeave={mouseLeave}>
-                            mchumpitazp@gmail.com
+                            mauro@polino.ru
                         </u>
                     </a>
                     

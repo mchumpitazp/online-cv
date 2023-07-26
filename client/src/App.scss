@@ -634,6 +634,7 @@ footer {
         }
     
         table {
+            th { text-transform: capitalize; }
             .hidden {
                 display: none;
                 visibility: hidden;

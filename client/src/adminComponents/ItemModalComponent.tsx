@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Modal, Button, Alert, ModalBody } from 'reactstrap';
+import { Modal, ModalBody, Button, Alert } from 'reactstrap';
 
 interface ItemModalProps {
     modalState: {

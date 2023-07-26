@@ -45,7 +45,8 @@ function ItemForm (props: ItemFormProps) {
                                 name={pair[0]}
                                 defaultValue={props.defaultValue? pair[1] : ''}
                                 type={inputType}
-                                placeholder={placeholder} >
+                                placeholder={placeholder}
+                                required >
                         </Input>
                     </Col>
                 </FormGroup>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Table, Nav, NavLink, TabContent, TabPane, Button} from "reactstrap";
+import ItemDeleteModal from './ItemDeleteModalComponent';
 
 interface PanelProps {
     data: any
@@ -9,11 +10,17 @@ interface PanelProps {
 function Panel (props: PanelProps) {
     const [currentTab, setCurrentTab] = React.useState('0');
     const [nameTab, setNameTab] = React.useState('');
+    const [modal, setModal] = React.useState(true);
+    const [itemId, setItemId] = React.useState('');
 
     React.useEffect(() => {
         const key: string = Object.keys(props.data)[0];
         setNameTab(key);
     }, [setNameTab, props]);
+
+    React.useEffect(() => {
+        setModal(modal => !modal);
+    }, [itemId]);
 
     const keys = Object.keys(props.data);
     const values = Object.values(props.data);
@@ -64,7 +71,7 @@ function Panel (props: PanelProps) {
                     </Link>
                     &nbsp;
                     &nbsp;
-                    <Button color='danger'>
+                    <Button color='danger' onClick={() => setItemId(itemObj._id)}>
                         <i className='fa fa-trash'></i>
                     </Button>
                 </td>
@@ -125,6 +132,11 @@ function Panel (props: PanelProps) {
                 <TabContent activeTab={currentTab}>
                     {renderTabContent}
                 </TabContent>
+
+                <ItemDeleteModal    itemTitle={nameTab}
+                                    itemId={itemId} 
+                                    isOpen={modal} 
+                                    setModal={setModal}/>
 
 
             </Container>
