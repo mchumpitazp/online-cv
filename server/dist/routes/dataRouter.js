@@ -22,8 +22,10 @@ dataRouter.route('/')
     for (const file of modelsFiles) {
         const model = require(modelsPath + '/' + file);
         const arr = yield model.find();
-        const key = file.replace('.js', '');
-        database[key] = arr;
+        if (arr.length) {
+            const key = file.replace('.js', '');
+            database[key] = arr;
+        }
     }
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');

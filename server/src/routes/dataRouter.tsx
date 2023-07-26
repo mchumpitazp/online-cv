@@ -15,8 +15,10 @@ dataRouter.route('/')
     for (const file of modelsFiles) {
         const model = require(modelsPath + '/' + file);
         const arr = await model.find();
-        const key = file.replace('.js', '');
-        database[key] = arr;
+        if (arr.length) {
+            const key = file.replace('.js', '');
+            database[key] = arr;
+        }
     }
 
     res.statusCode = 200;
