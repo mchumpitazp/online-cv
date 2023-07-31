@@ -2,23 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const fileSchema = new Schema({
+const userSchema = new Schema({
     name: {
+        type: String,
+        required: true
+    },
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    source: {
-        type: String,
-        required: true
-    },
-    record: {
-        type: Boolean,
-        default: false
-    },
-    date: {
+    password: {
         type: String,
         required: true
     }
 });
-module.exports = mongoose.model('File', fileSchema);
+module.exports = mongoose.model('User', userSchema);

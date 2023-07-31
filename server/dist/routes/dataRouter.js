@@ -12,13 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const authenticate = require('../authenticate');
 const dataRouter = express.Router();
 dataRouter.use(bodyParser.json());
 dataRouter.route('/')
-    .get((_req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const modelsPath = __dirname + '/../models';
-    const modelsFiles = fs.readdirSync(modelsPath);
+    .get(authenticate.verifyJwt, (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     let database = {};
+    const modelsPath = __dirname + '/../models';
+    let modelsFiles = fs.readdirSync(modelsPath);
+    modelsFiles = modelsFiles.filter((file) => !file.includes('users'));
     for (const file of modelsFiles) {
         const model = require(modelsPath + '/' + file);
         const arr = yield model.find();

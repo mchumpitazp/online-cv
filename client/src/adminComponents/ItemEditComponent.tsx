@@ -1,16 +1,18 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { baseUrl } from '../shared/baseUrl';
 import BackButton from './BackButtonComponent';
 import FormItem from './ItemFormComponent';
-import ItemModal from './ItemModalComponent';
+import ModalAlert from './ModalAlertComponent';
 
 interface ItemEditProps {
-    data: any
+    tokenWorking: (token: string) => boolean
 }
 
 function ItemEdit (props: ItemEditProps) {
+    const navigate = useNavigate();
+    const [itemObj, setItemObj] = React.useState({});
     const [submit, setSubmit] = React.useState(false);
     const [modalState, setModalState] = React.useState({
         isOpen: false,
@@ -22,52 +24,89 @@ function ItemEdit (props: ItemEditProps) {
     const { item_title } = useParams();
     const { state } = useLocation();
 
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token && props.tokenWorking(token)) {
+            fetch(baseUrl + '/' + item_title + '/' + state.item_id, {
+                method: 'GET',
+                headers: { 'x-access-token': localStorage.getItem('token')! }
+            })
+            .then(res => res.json())
+            .then(item => setItemObj(item))
+            .catch((error) => {
+                console.log(error);
+                setModalState({
+                    isOpen: true,
+                    color: 'danger',
+                    icon: 'exclamation-circle',
+                    phrase: 'Opsss! There is a server problem.'
+                });
+            })
+        } else {
+            navigate('login');
+        }
+    }, [props, item_title, state, navigate]);
+
     const submitForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         const formData: FormData = new FormData(e.currentTarget);
         let newData: { [key: string]: any } = {};
         formData.forEach((value, key) => newData[key] = value );
 
-        fetch(baseUrl + '/' + item_title + '/' + state.item_id, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newData)
-        })
-        .then(response => response.json())
-        .then(() => {
-            setModalState({
-                isOpen: true,
-                color: 'success',
-                icon: 'check-circle-o',
-                phrase: 'Successfully saved!'
-            });
-        })
-        .catch((error) => {
-            console.log(error);
+        const token = localStorage.getItem('token');
+        if (token && props.tokenWorking(token)) {
+            fetch(baseUrl + '/' + item_title + '/' + state.item_id, {
+                method: 'PUT',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
+                },
+                body: JSON.stringify(newData)
+            })
+            .then(response => response.json())
+            .then(() => {
+                setModalState({
+                    isOpen: true,
+                    color: 'success',
+                    icon: 'check-circle-o',
+                    phrase: 'Successfully saved!'
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                setModalState({
+                    isOpen: true,
+                    color: 'danger',
+                    icon: 'exclamation-circle',
+                    phrase: 'Opsss! There is a server problem.'
+                });
+            })
+            .finally(() => setSubmit(true));
+        } else {
             setModalState({
                 isOpen: true,
                 color: 'danger',
                 icon: 'exclamation-circle',
-                phrase: 'Opsss! There is a problem.'
+                phrase: 'Opsss! There is a token problem.'
             });
-        })
-        .finally(() => setSubmit(true));
+        }
     }
 
-    if (!props.data.isLoading) {
-        const itemObj = props.data.data[item_title!]?.filter((obj: any) => obj._id === state.item_id)[0];
-        
+    if (itemObj) {
         return (
             <div className='admin'>
                 <BackButton submit={submit}/>
 
-                <Container id='item'>
-                    <h4 id='item-title' className='admin-title'>{item_title} editor</h4>
+                <Container className='item'>
+                    <h4 className='item-title'>{item_title} editor</h4>
                     <br />
                     <FormItem  onSubmit={submitForm}
                                 itemObj={itemObj}
                                 defaultValue={true} />
-                    <ItemModal modalState={modalState} setModalState={setModalState} />
+                    <ModalAlert modalState={modalState} setModalState={setModalState}
+                                toDelete={false}
+                                toAdmin={true} />
                 </Container>
             </div>
             

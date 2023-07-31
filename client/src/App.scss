@@ -642,8 +642,26 @@ footer {
         }
     }
 
-    #item {
-       #item-title { text-transform: capitalize; } 
+    .item {
+       .item-title,
+       .col-form-label { text-transform: capitalize; } 
+    }
+
+    .form-user {
+        width: 100vw;
+        max-width: 340px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: $my-color 0px 0px 5px;
+        background-color: #f4f4f4;
+        color: #1a1a1a;
+
+        .form-label { font-weight: bold; }
+        .form-label,
+        .form-control,
+        .alert { font-size: 0.8rem; }
+        .btn { font-size: 0.7rem; }
     }
     
 }

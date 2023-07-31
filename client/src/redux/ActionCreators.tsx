@@ -81,19 +81,19 @@ export const addFiles = (files: any) => ({
 
 // database
 
-export const fetchData = () => (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
+export const fetchData = (token: string) => (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
     dispatch(dataLoading());
 
-    return fetch(baseUrl + '/data/')
+    return fetch(baseUrl + '/data/', {
+            headers: {
+                'x-access-token': token
+            }
+        })
         .then(response => {
-            if (response.ok) {
+            if (response.ok)
                 return response;
-            }
-            else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                // error.response = response;
-                throw error;
-            }
+            else 
+                throw Error('Error ' + response.status + ': ' + response.statusText);
         },
         error => {
             var errmess = new Error(error.message);

@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // modules
 require('dotenv').config();
 const express = require('express');
-const expressLayout = require('express-ejs-layouts');
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const connectDB = require('./db');
 //routers
-const projectRouter = require('./routes/projectsRouter');
+const userRouter = require('./routes/userRouter');
+const projectRouter = require('./routes/projectRouter');
 const dataRouter = require('./routes/dataRouter');
 // set server
 const port = '3003';
@@ -26,5 +26,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(helmet());
 app.use(cors());
 // routers
+app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter);
 app.use('/api/data', dataRouter);

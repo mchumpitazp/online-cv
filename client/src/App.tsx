@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Main from './components/MainComponent';
-import Admin from './adminComponents/AdminComponent';
+import AppAdmin from './adminComponents/AppAdmin';
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
                 <Routes>
                     <Route path="*" element={<Navigate to="/" replace />} />
                     <Route path="/" element={<Main />} />
-                    <Route path="/admin/*" element={<Admin />} />
+                    <Route path="/admin/*" element={<AppAdmin />} />
                 </Routes>
             </BrowserRouter>
         </Provider>
